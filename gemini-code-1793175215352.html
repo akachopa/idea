@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IDEA ERP - Student Management</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
+          colors: {
+            brand: { 50: '#FFF7ED', 100: '#FFEDD5', 500: '#F97316', 600: '#EA580C' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #FAF6F0; color: #1E293B; }
+    .custom-shadow { box-shadow: 0 2px 10px -2px rgba(0, 0, 0, 0.04), 0 1px 3px -1px rgba(0, 0, 0, 0.02); }
+  </style>
+</head>
+<body class="antialiased">
+  <div class="flex min-h-screen relative">
+    <div id="sidebarOverlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/40 z-40 hidden lg:hidden"></div>
+
+    <!-- SIDEBAR -->
+    <aside id="sidebar" class="w-64 bg-[#F7F3EB] border-r border-[#EBE5DA] flex flex-col justify-between fixed lg:sticky top-0 h-screen z-50 transition-transform duration-300 -translate-x-full lg:translate-x-0 shrink-0 select-none">
+      <div>
+        <div class="h-20 px-6 flex items-center justify-between border-b border-[#EBE5DA]/60">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-brand-600 to-amber-400 flex items-center justify-center shadow-sm">
+              <div class="w-4 h-4 rounded-full bg-[#F7F3EB]"></div>
+            </div>
+            <div>
+              <div class="font-extrabold text-lg tracking-tight text-slate-900 leading-none">IDEA ERP</div>
+              <div class="text-[10px] text-slate-500 font-medium leading-tight mt-1">Education for<br>a Brighter Tomorrow</div>
+            </div>
+          </div>
+          <button onclick="toggleSidebar()" class="text-slate-400 hover:text-slate-600"><i data-lucide="chevron-left" class="w-5 h-5"></i></button>
+        </div>
+
+        <nav class="p-3.5 space-y-1 text-sm font-semibold">
+          <a href="dashboard.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition"><i data-lucide="layout-grid" class="w-5 h-5"></i><span>Dashboard</span></a>
+          <a href="admission.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition"><i data-lucide="user-plus" class="w-5 h-5"></i><span>Admission</span></a>
+          <a href="finance.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition"><i data-lucide="coins" class="w-5 h-5"></i><span>Finance</span></a>
+          <a href="student-management.html" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-gradient-to-r from-brand-500 to-amber-500 text-white shadow-md shadow-brand-500/20"><i data-lucide="users" class="w-5 h-5"></i><span>Student Management</span></a>
+          <a href="assessment.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition"><i data-lucide="file-check-2" class="w-5 h-5"></i><span>Assessment & Certification</span></a>
+          <a href="career-placement.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition"><i data-lucide="briefcase" class="w-5 h-5"></i><span>Career & Placement</span></a>
+          <a href="partners.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition"><i data-lucide="handshake" class="w-5 h-5"></i><span>Partners</span></a>
+          <a href="alumni.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition"><i data-lucide="graduation-cap" class="w-5 h-5"></i><span>Alumni</span></a>
+          <a href="reports.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition"><i data-lucide="bar-chart-3" class="w-5 h-5"></i><span>Reports</span></a>
+        </nav>
+      </div>
+
+      <div class="p-3.5">
+        <div class="relative rounded-2xl bg-gradient-to-b from-[#FCEAD2] to-[#F8DEC0] p-4 overflow-hidden border border-amber-200/60">
+          <div class="flex justify-center mb-2">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80" alt="Global Talent" class="w-28 h-28 object-cover rounded-full border-4 border-white/80 shadow-sm" />
+          </div>
+          <h4 class="font-extrabold text-brand-600 text-sm leading-snug">Membangun<br>Talenta Global<br>dari Indonesia</h4>
+          <p class="text-[11px] text-slate-600 mt-1.5 leading-relaxed">Pendidikan, peluang dan masa depan yang lebih baik.</p>
+          <button class="mt-3 w-full py-2 px-3 bg-gradient-to-r from-brand-500 to-amber-500 text-white font-bold text-xs rounded-full flex items-center justify-center gap-1.5 shadow-sm">
+            <span>Bersama IDEA ERP</span><i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <div class="flex-1 flex flex-col min-w-0">
+      <header class="h-20 bg-[#FAF6F0]/90 backdrop-blur-sm sticky top-0 z-30 px-4 lg:px-8 flex items-center justify-between border-b border-[#EBE5DA]/70">
+        <div class="flex items-center gap-3 flex-1 max-w-xl">
+          <button onclick="toggleSidebar()" class="lg:hidden p-2 rounded-lg bg-white border border-slate-200 text-slate-700"><i data-lucide="menu" class="w-5 h-5"></i></button>
+          <div class="relative w-full">
+            <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2"></i>
+            <input type="text" placeholder="Cari data siswa, program, pembayaran, atau lainnya..." class="w-full pl-11 pr-4 py-2.5 text-sm bg-[#F3EFE6] border border-[#E6DFD3] rounded-full focus:outline-none focus:bg-white focus:border-brand-500 transition" />
+          </div>
+        </div>
+        <div class="flex items-center gap-4 ml-4">
+          <button class="relative p-2.5 rounded-full bg-white border border-slate-200/80 text-slate-700"><i data-lucide="bell" class="w-5 h-5"></i><span class="w-2.5 h-2.5 bg-brand-500 rounded-full absolute top-1.5 right-1.5 border-2 border-white"></span></button>
+          <div class="flex items-center gap-3 pl-2">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80" class="w-10 h-10 rounded-full object-cover border-2 border-white shadow-sm" />
+            <div class="hidden sm:block">
+              <div class="text-sm font-bold text-slate-800 leading-none">Sari Anggraini</div>
+              <div class="text-xs text-slate-500 mt-1">Head of Administration</div>
+            </div>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 hidden sm:block"></i>
+          </div>
+        </div>
+      </header>
+
+      <!-- HERO -->
+      <div class="bg-gradient-to-r from-[#FAF6F0] via-[#FAF6F0]/90 to-[#F3E9D8] border-b border-[#EBE5DA]/60 px-4 lg:px-8 py-6">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <h1 class="text-2xl lg:text-3xl font-extrabold text-slate-900 tracking-tight">Student Management</h1>
+            <p class="text-sm text-slate-600 mt-1">Kelola data siswa, pantau perkembangan, dan dukung perjalanan mereka bersama IDEA ERP.</p>
+          </div>
+          <div class="flex items-center gap-8">
+            <div class="text-left md:text-right">
+              <div class="text-sm font-bold text-slate-800">Senin, 21 Apr 2025</div>
+              <div class="text-xs text-slate-500 mt-0.5">Semangat untuk hari yang produktif!</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAIN -->
+      <main class="p-4 lg:p-8 space-y-6 max-w-[1600px] w-full mx-auto">
+        <!-- 6 KPI CARDS -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+          <div class="bg-white rounded-2xl p-4 custom-shadow border border-slate-100 flex items-start gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center shrink-0"><i data-lucide="users" class="w-5 h-5"></i></div>
+            <div><div class="text-xs text-slate-500">Active Students</div><div class="text-2xl font-extrabold text-slate-900 mt-0.5">892</div><div class="text-[11px] font-semibold text-emerald-600 mt-1">↑ 5% <span class="text-slate-400 font-normal">dari bulan lalu</span></div></div>
+          </div>
+          <div class="bg-white rounded-2xl p-4 custom-shadow border border-slate-100 flex items-start gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center shrink-0"><i data-lucide="graduation-cap" class="w-5 h-5"></i></div>
+            <div><div class="text-xs text-slate-500">New Enrollment</div><div class="text-2xl font-extrabold text-slate-900 mt-0.5">124</div><div class="text-[11px] font-semibold text-emerald-600 mt-1">↑ 18% <span class="text-slate-400 font-normal">dari bulan lalu</span></div></div>
+          </div>
+          <div class="bg-white rounded-2xl p-4 custom-shadow border border-slate-100 flex items-start gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center shrink-0"><i data-lucide="bar-chart-2" class="w-5 h-5"></i></div>
+            <div><div class="text-xs text-slate-500">Attendance Rate</div><div class="text-2xl font-extrabold text-slate-900 mt-0.5">87%</div><div class="text-[11px] font-semibold text-emerald-600 mt-1">↑ 3% <span class="text-slate-400 font-normal">dari bulan lalu</span></div></div>
+          </div>
+          <div class="bg-white rounded-2xl p-4 custom-shadow border border-slate-100 flex items-start gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center shrink-0"><i data-lucide="book-open" class="w-5 h-5"></i></div>
+            <div><div class="text-xs text-slate-500">Training Progress</div><div class="text-2xl font-extrabold text-slate-900 mt-0.5">76%</div><div class="text-[11px] font-semibold text-emerald-600 mt-1">↑ 8% <span class="text-slate-400 font-normal">dari bulan lalu</span></div></div>
+          </div>
+          <div class="bg-white rounded-2xl p-4 custom-shadow border border-slate-100 flex items-start gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center shrink-0"><i data-lucide="home" class="w-5 h-5"></i></div>
+            <div><div class="text-xs text-slate-500">Students in Dormitory</div><div class="text-2xl font-extrabold text-slate-900 mt-0.5">276</div><div class="text-[11px] font-semibold text-emerald-600 mt-1">↑ 6% <span class="text-slate-400 font-normal">dari bulan lalu</span></div></div>
+          </div>
+          <div class="bg-white rounded-2xl p-4 custom-shadow border border-slate-100 flex items-start gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center shrink-0"><i data-lucide="award" class="w-5 h-5"></i></div>
+            <div><div class="text-xs text-slate-500">Graduation Ready</div><div class="text-2xl font-extrabold text-slate-900 mt-0.5">62</div><div class="text-[11px] font-semibold text-emerald-600 mt-1">↑ 25% <span class="text-slate-400 font-normal">dari bulan lalu</span></div></div>
+          </div>
+        </div>
+
+        <!-- FILTER BAR -->
+        <div class="bg-white rounded-2xl p-4 custom-shadow border border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs">
+          <div class="flex flex-wrap items-center gap-3">
+            <span class="font-bold text-slate-700">Filter:</span>
+            <select class="px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl font-semibold"><option>📍 Semua Cabang</option></select>
+            <select class="px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl font-semibold"><option>📅 Semua Batch</option></select>
+            <select class="px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl font-semibold"><option>🎓 Semua Program</option></select>
+          </div>
+          <div class="flex items-center gap-3 flex-1 sm:flex-initial justify-end">
+            <button class="font-bold text-brand-600 hover:underline">Reset Filter</button>
+            <div class="relative w-64">
+              <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
+              <input type="text" placeholder="Cari nama siswa, ID, atau program..." class="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl" />
+            </div>
+          </div>
+        </div>
+
+        <!-- MIDDLE GRID: SCHEDULE + CHARTS + ACTIVITIES -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <!-- Jadwal Kelas Minggu Ini -->
+          <div class="lg:col-span-5 bg-white rounded-2xl p-5 custom-shadow border border-slate-100">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="font-bold text-slate-800 text-base">Jadwal Kelas Minggu Ini</h3>
+              <a href="#" class="text-xs font-bold text-brand-600">Lihat Semua →</a>
+            </div>
+            <div class="flex items-center justify-center gap-4 text-xs font-bold text-slate-700 mb-4">
+              <button class="p-1 rounded hover:bg-slate-100">‹</button>
+              <span>21 – 27 Apr 2025</span>
+              <button class="p-1 rounded hover:bg-slate-100">›</button>
+            </div>
+            <div class="overflow-x-auto">
+              <div class="min-w-[420px]">
+                <div class="grid grid-cols-8 text-center text-[11px] text-slate-500 pb-2 border-b border-slate-100">
+                  <div></div>
+                  <div><b class="text-slate-700">Sen</b><br>21 Apr</div>
+                  <div><b class="text-slate-700">Sel</b><br>22 Apr</div>
+                  <div><b class="text-slate-700">Rab</b><br>23 Apr</div>
+                  <div><b class="text-slate-700">Kam</b><br>24 Apr</div>
+                  <div><b class="text-slate-700">Jum</b><br>25 Apr</div>
+                  <div><b class="text-slate-700">Sab</b><br>26 Apr</div>
+                  <div><b class="text-slate-700">Min</b><br>27 Apr</div>
+                </div>
+                <!-- Rows -->
+                <div class="grid grid-cols-8 items-center text-[10px] py-3 border-b border-slate-50 gap-1">
+                  <div class="text-slate-400">08:00</div>
+                  <div class="col-span-2 bg-orange-100 text-brand-600 font-bold p-2 rounded-lg">Hospitality<br>Basic</div>
+                  <div></div>
+                  <div class="col-span-2 bg-orange-50 text-brand-600 font-bold p-2 rounded-lg">F&B Service</div>
+                  <div class="col-span-2"></div>
+                </div>
+                <div class="grid grid-cols-8 items-center text-[10px] py-3 border-b border-slate-50 gap-1">
+                  <div class="text-slate-400">10:00</div>
+                  <div class="col-span-2"></div>
+                  <div class="col-span-2 bg-blue-50 text-blue-600 font-bold p-2 rounded-lg">Culinary<br>Practical</div>
+                  <div></div>
+                  <div class="col-span-2 bg-red-50 text-red-600 font-bold p-2 rounded-lg">Japanese<br>Language</div>
+                </div>
+                <div class="grid grid-cols-8 items-center text-[10px] py-3 border-b border-slate-50 gap-1">
+                  <div class="text-slate-400">13:00</div>
+                  <div></div>
+                  <div class="col-span-3 bg-emerald-50 text-emerald-700 font-bold p-2 rounded-lg">English<br>Communication</div>
+                  <div class="col-span-3"></div>
+                </div>
+                <div class="grid grid-cols-8 items-center text-[10px] py-3 gap-1">
+                  <div class="text-slate-400">15:00</div>
+                  <div></div>
+                  <div class="col-span-2 bg-purple-50 text-purple-700 font-bold p-2 rounded-lg">Housekeeping<br>Training</div>
+                  <div class="col-span-4"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Middle Column: Training Progress + Distribusi Siswa -->
+          <div class="lg:col-span-4 space-y-6">
+            <div class="bg-white rounded-2xl p-5 custom-shadow border border-slate-100">
+              <div class="flex items-center justify-between mb-3">
+                <h3 class="font-bold text-slate-800 text-sm">Training Progress per Program</h3>
+                <span class="text-xs text-slate-500">Tahun Ini ▾</span>
+              </div>
+              <div class="h-36 flex items-end justify-between gap-2.5 pt-4 px-2 border-b border-slate-100 text-[10px]">
+                <div class="flex flex-col items-center flex-1"><b class="mb-1">88%</b><div class="w-full bg-brand-500 h-24 rounded-t"></div><span class="mt-1.5 text-slate-500">Hospitality</span></div>
+                <div class="flex flex-col items-center flex-1"><b class="mb-1">72%</b><div class="w-full bg-orange-400 h-16 rounded-t"></div><span class="mt-1.5 text-slate-500">Culinary</span></div>
+                <div class="flex flex-col items-center flex-1"><b class="mb-1">65%</b><div class="w-full bg-orange-300 h-14 rounded-t"></div><span class="mt-1.5 text-slate-500">Cruise</span></div>
+                <div class="flex flex-col items-center flex-1"><b class="mb-1">78%</b><div class="w-full bg-amber-700/60 h-20 rounded-t"></div><span class="mt-1.5 text-slate-500">Business</span></div>
+                <div class="flex flex-col items-center flex-1"><b class="mb-1">70%</b><div class="w-full bg-orange-200 h-16 rounded-t"></div><span class="mt-1.5 text-slate-500">Language</span></div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-5 custom-shadow border border-slate-100">
+              <h3 class="font-bold text-slate-800 text-sm mb-3">Distribusi Siswa per Program</h3>
+              <div class="flex items-center justify-between gap-4">
+                <div class="w-28 h-28 rounded-full flex items-center justify-center shrink-0" style="background: conic-gradient(#F97316 0% 35%, #FB923C 35% 60%, #FDBA74 60% 75%, #B45309 75% 89%, #FED7AA 89% 100%);">
+                  <div class="w-20 h-20 bg-white rounded-full flex flex-col items-center justify-center text-center">
+                    <span class="text-[10px] text-slate-400">Total</span>
+                    <span class="text-base font-extrabold text-slate-900">892</span>
+                    <span class="text-[10px] text-slate-400">Siswa</span>
+                  </div>
+                </div>
+                <div class="space-y-1.5 text-xs flex-1">
+                  <div class="flex justify-between"><span><span class="inline-block w-2 h-2 rounded-full bg-brand-500 mr-1.5"></span>Hospitality</span><b>35% <span class="text-slate-400 font-normal">(312)</span></b></div>
+                  <div class="flex justify-between"><span><span class="inline-block w-2 h-2 rounded-full bg-orange-400 mr-1.5"></span>Culinary</span><b>25% <span class="text-slate-400 font-normal">(223)</span></b></div>
+                  <div class="flex justify-between"><span><span class="inline-block w-2 h-2 rounded-full bg-orange-300 mr-1.5"></span>Cruise</span><b>15% <span class="text-slate-400 font-normal">(134)</span></b></div>
+                  <div class="flex justify-between"><span><span class="inline-block w-2 h-2 rounded-full bg-amber-700 mr-1.5"></span>Business</span><b>14% <span class="text-slate-400 font-normal">(125)</span></b></div>
+                  <div class="flex justify-between"><span><span class="inline-block w-2 h-2 rounded-full bg-orange-200 mr-1.5"></span>Language</span><b>11% <span class="text-slate-400 font-normal">(98)</span></b></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Aktivitas & Notifikasi Terbaru -->
+          <div class="lg:col-span-3 bg-white rounded-2xl p-5 custom-shadow border border-slate-100">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="font-bold text-slate-800 text-sm">Aktivitas & Notifikasi Terbaru</h3>
+              <a href="#" class="text-xs font-bold text-brand-600">Lihat Semua →</a>
+            </div>
+            <div class="space-y-3.5 text-xs">
+              <div class="flex justify-between gap-2"><div><b>Pendaftaran siswa baru</b><div class="text-slate-500 text-[11px]">Andi Wijaya terdaftar pada program Hospitality (Batch Sep 2025)</div></div><span class="text-slate-400 text-[10px]">10:24</span></div>
+              <div class="flex justify-between gap-2"><div><b>Kehadiran kelas</b><div class="text-slate-500 text-[11px]">Tingkat kehadiran program Culinary minggu ini mencapai 92%</div></div><span class="text-slate-400 text-[10px]">09:18</span></div>
+              <div class="flex justify-between gap-2"><div><b>Progres pelatihan meningkat</b><div class="text-slate-500 text-[11px]">Rata-rata progress program Hospitality naik 8% dari bulan lalu</div></div><span class="text-slate-400 text-[10px]">08:45</span></div>
+              <div class="flex justify-between gap-2"><div><b>Penempatan asrama</b><div class="text-slate-500 text-[11px]">Siti Rahma ditempatkan di Dormitory A (kamar 204)</div></div><span class="text-slate-400 text-[10px]">19 Apr</span></div>
+              <div class="flex justify-between gap-2"><div><b>Sertifikat diterbitkan</b><div class="text-slate-500 text-[11px]">5 siswa telah menyelesaikan modul Housekeeping Basic</div></div><span class="text-slate-400 text-[10px]">19 Apr</span></div>
+              <div class="flex justify-between gap-2"><div><b class="text-red-600">Perlu perhatian</b><div class="text-slate-500 text-[11px]">3 siswa dengan kehadiran di bawah 75%</div></div><span class="text-slate-400 text-[10px]">19 Apr</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DAFTAR SISWA TABLE -->
+        <div class="bg-white rounded-2xl p-5 custom-shadow border border-slate-100">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-bold text-slate-800 text-base">Daftar Siswa</h3>
+            <div class="flex items-center gap-2 text-xs">
+              <button class="px-3.5 py-2 border border-slate-200 rounded-xl font-bold text-slate-700 bg-slate-50">↓ Export</button>
+              <button class="px-4 py-2 bg-brand-500 text-white rounded-xl font-bold">+ Tambah Siswa</button>
+            </div>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead>
+                <tr class="bg-[#F5F1E8] text-slate-600 font-bold">
+                  <th class="py-3 px-3 rounded-l-lg"><input type="checkbox"/></th>
+                  <th class="py-3 px-3">Student ID</th><th class="py-3 px-3">Nama</th><th class="py-3 px-3">Program</th><th class="py-3 px-3">Batch</th><th class="py-3 px-3">Attendance</th><th class="py-3 px-3">Training Progress</th><th class="py-3 px-3 text-center">Status</th><th class="py-3 px-3 rounded-r-lg text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 font-medium">
+                <tr>
+                  <td class="py-3 px-3"><input type="checkbox"/></td><td class="py-3 px-3">STD0001</td>
+                  <td class="py-3 px-3 flex items-center gap-2 font-bold"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=80&q=80" class="w-6 h-6 rounded-full object-cover"/>Putri Ananda</td>
+                  <td class="py-3 px-3">Hospitality</td><td class="py-3 px-3">Sep 2024</td><td class="py-3 px-3 text-emerald-600 font-bold">92%</td>
+                  <td class="py-3 px-3"><div class="flex items-center gap-2"><div class="w-28 h-2 bg-slate-100 rounded-full"><div class="w-[80%] h-full bg-brand-500 rounded-full"></div></div><span>80%</span></div></td>
+                  <td class="py-3 px-3 text-center"><span class="px-3 py-0.5 rounded-full bg-emerald-50 text-emerald-600 font-bold">Aktif</span></td><td class="py-3 px-3 text-center">•••</td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-3"><input type="checkbox"/></td><td class="py-3 px-3">STD0002</td>
+                  <td class="py-3 px-3 flex items-center gap-2 font-bold"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=80&q=80" class="w-6 h-6 rounded-full object-cover"/>Rizky Pratama</td>
+                  <td class="py-3 px-3">Culinary</td><td class="py-3 px-3">Jan 2025</td><td class="py-3 px-3 text-emerald-600 font-bold">88%</td>
+                  <td class="py-3 px-3"><div class="flex items-center gap-2"><div class="w-28 h-2 bg-slate-100 rounded-full"><div class="w-[72%] h-full bg-brand-500 rounded-full"></div></div><span>72%</span></div></td>
+                  <td class="py-3 px-3 text-center"><span class="px-3 py-0.5 rounded-full bg-emerald-50 text-emerald-600 font-bold">Aktif</span></td><td class="py-3 px-3 text-center">•••</td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-3"><input type="checkbox"/></td><td class="py-3 px-3">STD0003</td>
+                  <td class="py-3 px-3 flex items-center gap-2 font-bold"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=80&q=80" class="w-6 h-6 rounded-full object-cover"/>Alya Ramadhani</td>
+                  <td class="py-3 px-3">Cabin Crew</td><td class="py-3 px-3">Sep 2024</td><td class="py-3 px-3 text-emerald-600 font-bold">95%</td>
+                  <td class="py-3 px-3"><div class="flex items-center gap-2"><div class="w-28 h-2 bg-slate-100 rounded-full"><div class="w-[85%] h-full bg-brand-500 rounded-full"></div></div><span>85%</span></div></td>
+                  <td class="py-3 px-3 text-center"><span class="px-3 py-0.5 rounded-full bg-emerald-50 text-emerald-600 font-bold">Aktif</span></td><td class="py-3 px-3 text-center">•••</td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-3"><input type="checkbox"/></td><td class="py-3 px-3">STD0004</td>
+                  <td class="py-3 px-3 flex items-center gap-2 font-bold"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=80&q=80" class="w-6 h-6 rounded-full object-cover"/>Dimas Setiawan</td>
+                  <td class="py-3 px-3">Hospitality</td><td class="py-3 px-3">Jan 2025</td><td class="py-3 px-3 text-brand-600 font-bold">78%</td>
+                  <td class="py-3 px-3"><div class="flex items-center gap-2"><div class="w-28 h-2 bg-slate-100 rounded-full"><div class="w-[65%] h-full bg-brand-500 rounded-full"></div></div><span>65%</span></div></td>
+                  <td class="py-3 px-3 text-center"><span class="px-3 py-0.5 rounded-full bg-orange-50 text-brand-600 font-bold">Perlu Perhatian</span></td><td class="py-3 px-3 text-center">•••</td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-3"><input type="checkbox"/></td><td class="py-3 px-3">STD0005</td>
+                  <td class="py-3 px-3 flex items-center gap-2 font-bold"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=80&q=80" class="w-6 h-6 rounded-full object-cover"/>Siti Rahma</td>
+                  <td class="py-3 px-3">Business</td><td class="py-3 px-3">Sep 2024</td><td class="py-3 px-3 text-emerald-600 font-bold">90%</td>
+                  <td class="py-3 px-3"><div class="flex items-center gap-2"><div class="w-28 h-2 bg-slate-100 rounded-full"><div class="w-[78%] h-full bg-brand-500 rounded-full"></div></div><span>78%</span></div></td>
+                  <td class="py-3 px-3 text-center"><span class="px-3 py-0.5 rounded-full bg-emerald-50 text-emerald-600 font-bold">Aktif</span></td><td class="py-3 px-3 text-center">•••</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script>
+    lucide.createIcons();
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('-translate-x-full');
+      document.getElementById('sidebarOverlay').classList.toggle('hidden');
+    }
+  </script>
+</body>
+</html>

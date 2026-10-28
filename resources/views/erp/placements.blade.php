@@ -1,552 +1,368 @@
 <!DOCTYPE html>
-<html lang="id"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Career &amp; Placement - IDEA ERP</title>
-<!-- Tailwind CSS v3 with Forms & Container Queries -->
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<!-- Google Fonts: Plus Jakarta Sans -->
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-<!-- Lucide Icons -->
-<script src="https://unpkg.com/lucide@latest"></script>
-<script>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IDEA ERP - Career &amp; Placement</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
     tailwind.config = {
       theme: {
         extend: {
-          fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-          },
+          fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
           colors: {
-            brand: {
-              50: '#fff7ed',
-              100: '#ffedd5',
-              200: '#fed7aa',
-              300: '#fdba74',
-              400: '#fb923c',
-              500: '#f97316',
-              600: '#ea580c',
-              700: '#c2410c',
-            },
-            sidebar: '#fbfbfb',
-            page: '#f7f8fa',
+            brand: { 50: '#FFF7ED', 100: '#FFEDD5', 500: '#F97316', 600: '#EA580C' }
           }
         }
       }
     }
   </script>
-<style data-purpose="custom-layout">
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: #f7f8fa;
-    }
-    .pipeline-step {
-      position: relative;
-      clip-path: polygon(0% 0%, calc(100% - 14px) 0%, 100% 50%, calc(100% - 14px) 100%, 0% 100%, 14px 50%);
-    }
-    .pipeline-step.first-step {
-      clip-path: polygon(0% 0%, calc(100% - 14px) 0%, 100% 50%, calc(100% - 14px) 100%, 0% 100%);
-      border-top-left-radius: 0.75rem;
-      border-bottom-left-radius: 0.75rem;
-    }
-    .pipeline-step.last-step {
-      clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 14px 50%);
-      border-top-right-radius: 0.75rem;
-      border-bottom-right-radius: 0.75rem;
-    }
-    .custom-scroll::-webkit-scrollbar {
-      height: 6px;
-      width: 6px;
-    }
-    .custom-scroll::-webkit-scrollbar-thumb {
-      background: #e2e8f0;
-      border-radius: 4px;
-    }
+  <style>
+    body { background-color: #FAF6F0; color: #1E293B; }
+    .custom-shadow { box-shadow: 0 2px 10px -2px rgba(0, 0, 0, 0.04), 0 1px 3px -1px rgba(0, 0, 0, 0.02); }
   </style>
 </head>
-<body class="text-slate-800 antialiased min-h-screen flex bg-[#f7f8fa]">
-<!-- BEGIN: Sidebar -->
-<aside class="w-[260px] bg-white border-r border-slate-200/80 flex flex-col shrink-0 min-h-screen select-none justify-between z-20">
-<div>
-<!-- Logo Branding -->
-<div class="px-6 py-5 flex items-center justify-between">
-<a href="{{ route('erp.dashboard') }}" class="flex items-center gap-3">
-<div class="w-10 h-10 rounded-full border-[3px] border-orange-500 flex items-center justify-center">
-<div class="w-4 h-4 rounded-full border-[2.5px] border-orange-400"></div>
-</div>
-<div>
-<span class="text-lg font-extrabold tracking-tight text-slate-800 leading-none block">IDEA ERP</span>
-<span class="text-[10px] text-slate-400 font-medium tracking-tight leading-tight block mt-0.5">Education for<br/>a Brighter Tomorrow</span>
-</div>
-</a>
-<button class="text-slate-400 hover:text-slate-600 transition-colors p-1" title="Collapse sidebar">
-<i class="w-4 h-4" data-lucide="chevron-left"></i>
-</button>
-</div>
-<!-- Navigation Links -->
-<nav class="px-4 py-2 space-y-1">
-<a class="flex items-center gap-3.5 px-4 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 font-medium text-sm transition-all group" href="{{ route('erp.dashboard') }}">
-<i class="w-4 h-4 text-slate-500 group-hover:text-slate-800" data-lucide="layout-grid"></i>
-<span>Dashboard</span>
-</a>
-<a class="flex items-center gap-3.5 px-4 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 font-medium text-sm transition-all group" href="{{ route('erp.admission') }}">
-<i class="w-4 h-4 text-slate-500 group-hover:text-slate-800" data-lucide="user-plus"></i>
-<span>Admission</span>
-</a>
-<a class="flex items-center gap-3.5 px-4 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 font-medium text-sm transition-all group" href="{{ route('erp.finance') }}">
-<i class="w-4 h-4 text-slate-500 group-hover:text-slate-800" data-lucide="credit-card"></i>
-<span>Finance</span>
-</a>
-<a class="flex items-center gap-3.5 px-4 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 font-medium text-sm transition-all group" href="{{ route('erp.students') }}">
-<i class="w-4 h-4 text-slate-500 group-hover:text-slate-800" data-lucide="users"></i>
-<span>Student Management</span>
-</a>
-<a class="flex items-center gap-3.5 px-4 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 font-medium text-sm transition-all group" href="{{ route('erp.assessments') }}">
-<i class="w-4 h-4 text-slate-500 group-hover:text-slate-800" data-lucide="file-check-2"></i>
-<span>Assessment &amp; Certification</span>
-</a>
-<!-- Active Menu Item: Career & Placement -->
-<a class="flex items-center gap-3.5 px-4 py-2.5 rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold text-sm shadow-md shadow-orange-500/20 transition-all" href="{{ route('erp.placements') }}">
-<i class="w-4 h-4 text-white" data-lucide="briefcase"></i>
-<span>Career &amp; Placement</span>
-</a>
-<a class="flex items-center gap-3.5 px-4 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 font-medium text-sm transition-all group" href="{{ route('erp.partners') }}">
-<i class="w-4 h-4 text-slate-500 group-hover:text-slate-800" data-lucide="handshake"></i>
-<span>Partners</span>
-</a>
-<a class="flex items-center gap-3.5 px-4 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 font-medium text-sm transition-all group" href="{{ route('erp.alumni') }}">
-<i class="w-4 h-4 text-slate-500 group-hover:text-slate-800" data-lucide="graduation-cap"></i>
-<span>Alumni</span>
-</a>
-<a class="flex items-center gap-3.5 px-4 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 font-medium text-sm transition-all group" href="{{ route('erp.reports') }}">
-<i class="w-4 h-4 text-slate-500 group-hover:text-slate-800" data-lucide="bar-chart-2"></i>
-<span>Reports</span>
-</a>
-</nav>
-</div>
-<!-- Sidebar Bottom Promo Card -->
-<div class="p-4">
-<div class="rounded-2xl p-4 relative overflow-hidden bg-gradient-to-b from-orange-50 to-orange-100/70 border border-orange-200/50 shadow-sm text-left">
-<div class="h-28 w-full rounded-xl mb-3 flex items-center justify-center relative overflow-hidden bg-orange-200/30">
-<img alt="Students Banner" class="w-full h-full object-cover rounded-lg opacity-85 mix-blend-multiply" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgqfr4A3o4rZzaaka1jZ6uAs1HlVCqPpCOWLm-0NgIpg0GHHV9mMrm0ft5Za_TXavrfbAlKu85ioMBXQCId3j3sdivc7rymrevyHBxGyFW2ppu-KkGttLyzbDER_OMNzcW-SNLZzOB-5-GvfZ80TAT2GkVZ21wN7NaotKtRbg1AWsjGIed_tpQYY6YDlHZnur-ZkwdRwEdeMIWMYlb1wJLS_XVSLVXN-rtCGHlIto"/>
-<div class="absolute inset-0 bg-gradient-to-t from-orange-100 via-transparent to-transparent"></div>
-</div>
-<h4 class="font-bold text-sm leading-tight text-orange-600 mb-1">Membangun<br/>Talenta Global<br/>dari Indonesia</h4>
-<p class="text-[11px] text-slate-600 mb-3.5 leading-snug">Pendidikan, peluang dan masa depan yang lebih baik.</p>
-<a class="inline-flex items-center justify-center gap-2 w-full py-2 px-3 bg-orange-600 hover:bg-orange-700 text-white rounded-xl text-xs font-semibold shadow-sm shadow-orange-500/30 transition-all" href="{{ route('erp.reports') }}">
-<span>Bersama IDEA ERP</span>
-<i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
-</a>
-</div>
-</div>
-</aside>
-<!-- END: Sidebar -->
-<!-- BEGIN: Main Content Area -->
-<main class="flex-1 flex flex-col min-w-0 overflow-y-auto">
-<!-- BEGIN: Topbar -->
-<header class="h-18 px-8 py-3.5 bg-white border-b border-slate-200/70 flex items-center justify-between sticky top-0 z-10">
-<!-- Search Input -->
-<form action="{{ route('erp.placements') }}" method="GET" class="relative w-full max-w-xl">
-<span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-400">
-<i class="w-4 h-4" data-lucide="search"></i>
-</span>
-<input name="q" value="{{ $filters['q'] ?? '' }}" class="w-full pl-10 pr-4 py-2 bg-slate-50/70 border border-slate-200 rounded-xl text-xs text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all" placeholder="Cari lowongan kerja, perusahaan mitra, posisi, atau negara..." type="text"/>
-</form>
-<!-- User Profile & Notifications -->
-<div class="flex items-center gap-5">
-<button onclick="document.getElementById('modalAddVacancy').classList.remove('hidden')" class="px-3.5 py-2 bg-orange-600 hover:bg-orange-700 text-white text-xs font-bold rounded-xl shadow-sm transition">
-  + Tambah Lowongan
-</button>
-<div class="h-8 w-px bg-slate-200"></div>
-<div class="flex items-center gap-3 cursor-pointer group">
-<img alt="Sari Anggraini" class="w-9 h-9 rounded-full object-cover ring-2 ring-orange-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_lFJP-uqfaV0gBiG6jqzcgauZfkN0_EBikOVFxMyOQYQ0T17_7N84VrWsROuE0Q0dd3f9LAlm75uenJl6KwzppVZQ2_gP5-YNZgv_DD2dUOC7jD9NqjOsSsjZPSC7pyzBNcm3w5qhhSqCcTQHKl44Lgd_9853sD2YFv-ZJlGlOiW58ahEzmtG5JG6Wnok9PL47CZMuHY8tU5oTFJiab67CEdSzabH5BU4vAoCZ2s"/>
-<div class="text-left">
-<span class="text-xs font-bold text-slate-800 group-hover:text-orange-600 transition-colors block leading-tight">{{ $currentUser->full_name ?? 'Sari Anggraini' }}</span>
-<span class="text-[11px] text-slate-400 block leading-tight">{{ $currentUser->position_name ?? 'Head of Administration' }}</span>
-</div>
-<i class="w-4 h-4 text-slate-400 group-hover:text-slate-600 transition-colors" data-lucide="chevron-down"></i>
-</div>
-</div>
-</header>
-<!-- END: Topbar -->
-<!-- BEGIN: Dashboard Body -->
-<div class="p-8 space-y-6">
-@if(session('success'))
-<div class="bg-emerald-50 border border-emerald-200 text-emerald-800 px-4 py-3 rounded-xl text-xs font-semibold flex items-center justify-between shadow-sm">
-  <span>{{ session('success') }}</span>
-  <button onclick="this.parentElement.remove()" class="text-emerald-600 hover:text-emerald-900">✕</button>
-</div>
-@endif
-<!-- BEGIN: Header Section & Announcement Banner -->
-<section class="flex flex-col lg:flex-row items-stretch justify-between gap-6" data-purpose="page-hero">
-<div class="flex-1 flex flex-col justify-center">
-<h1 class="text-2xl font-black text-slate-900 tracking-tight">Career &amp; Placement</h1>
-<p class="text-xs text-slate-500 mt-1">Kelola peluang karir, proses penempatan, dan keberhasilan alumni kami.</p>
-</div>
-<!-- Banner Right -->
-<div class="flex items-center justify-between bg-gradient-to-r from-orange-100/60 via-amber-50 to-orange-50/70 border border-orange-200/50 rounded-2xl px-6 py-4 relative overflow-hidden shadow-xs min-w-[420px]">
-<div class="z-10">
-<span class="text-xs font-semibold text-slate-800 block">Senin, 21 Apr 2025</span>
-<span class="text-[11px] text-slate-500 font-medium block mt-0.5">Semangat untuk hari yang produktif!</span>
-</div>
-<div class="z-10 text-right">
-<span class="text-[11px] font-bold text-slate-800 leading-tight block">People<br/>Education<br/>Opportunities</span>
-<span class="text-[9px] text-orange-600 font-semibold block mt-0.5 tracking-wide">A Brighter Tomorrow</span>
-</div>
-<div class="absolute right-24 inset-y-0 w-36 pointer-events-none opacity-40">
-<img alt="Office space" class="w-full h-full object-cover mix-blend-luminosity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHQ8awzRc5ccRUUieMKfM_HbkyGrSe59bzKFL6MG46u3mTI-UUgzLbC1thrRHFx7u-pP3mUC1QCxIRM4GnZeowIyXB_PVo4dlZjpgQtgTs51v1R9e6_7Sykn61c3EXyRiE6fJ1mYyCG0xrF1MEMEghVb_uGyUQlt1FiuiwmD5tEpEi2MVt8sRVMJzTObrFH4aenE1Nrw0WsLpwbTn4d-uU3_Uwwb3GX5iEXLuvXWM"/>
-</div>
-</div>
-</section>
-<!-- END: Header Section & Announcement Banner -->
-<!-- BEGIN: KPI Summary Cards -->
-<section class="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-6 gap-3.5" data-purpose="kpi-metrics">
-<!-- Card 1 -->
-<div class="bg-white p-3.5 rounded-2xl border border-slate-100 shadow-sm hover:shadow transition-shadow">
-<div class="flex items-center justify-between mb-2">
-<span class="text-[11px] font-semibold text-slate-600 leading-tight">Placement Ready<br/>Candidates</span>
-<div class="w-8 h-8 rounded-xl bg-orange-100 flex items-center justify-center text-orange-600 shrink-0">
-<i class="w-4 h-4" data-lucide="users"></i>
-</div>
-</div>
-<div class="text-xl font-extrabold text-slate-800">{{ $kpis['ready_candidates'] }}</div>
-<div class="flex items-center gap-1 mt-1 text-[10px] text-emerald-600 font-semibold">
-<i class="w-3 h-3" data-lucide="arrow-up"></i>
-<span>14%</span>
-<span class="text-slate-400 font-normal">dari bulan lalu</span>
-</div>
-</div>
-<!-- Card 2 -->
-<div class="bg-white p-3.5 rounded-2xl border border-slate-100 shadow-sm hover:shadow transition-shadow">
-<div class="flex items-center justify-between mb-2">
-<span class="text-[11px] font-semibold text-slate-600 leading-tight">Open<br/>Vacancies</span>
-<div class="w-8 h-8 rounded-xl bg-orange-100 flex items-center justify-center text-orange-600 shrink-0">
-<i class="w-4 h-4" data-lucide="briefcase"></i>
-</div>
-</div>
-<div class="text-xl font-extrabold text-slate-800">{{ $kpis['open_vacancies'] }}</div>
-<div class="flex items-center gap-1 mt-1 text-[10px] text-emerald-600 font-semibold">
-<i class="w-3 h-3" data-lucide="arrow-up"></i>
-<span>23%</span>
-<span class="text-slate-400 font-normal">dari bulan lalu</span>
-</div>
-</div>
-<!-- Card 3 -->
-<div class="bg-white p-3.5 rounded-2xl border border-slate-100 shadow-sm hover:shadow transition-shadow">
-<div class="flex items-center justify-between mb-2">
-<span class="text-[11px] font-semibold text-slate-600 leading-tight">Interviews<br/>This Week</span>
-<div class="w-8 h-8 rounded-xl bg-orange-100 flex items-center justify-center text-orange-600 shrink-0">
-<i class="w-4 h-4" data-lucide="calendar"></i>
-</div>
-</div>
-<div class="text-xl font-extrabold text-slate-800">{{ $kpis['interviews'] }}</div>
-<div class="flex items-center gap-1 mt-1 text-[10px] text-emerald-600 font-semibold">
-<i class="w-3 h-3" data-lucide="arrow-up"></i>
-<span>12%</span>
-<span class="text-slate-400 font-normal">dari minggu lalu</span>
-</div>
-</div>
-<!-- Card 4 -->
-<div class="bg-white p-3.5 rounded-2xl border border-slate-100 shadow-sm hover:shadow transition-shadow">
-<div class="flex items-center justify-between mb-2">
-<span class="text-[11px] font-semibold text-slate-600 leading-tight">Accepted<br/>Offers</span>
-<div class="w-8 h-8 rounded-xl bg-orange-100 flex items-center justify-center text-orange-600 shrink-0">
-<i class="w-4 h-4" data-lucide="file-check"></i>
-</div>
-</div>
-<div class="text-xl font-extrabold text-slate-800">{{ $kpis['accepted_offers'] }}</div>
-<div class="flex items-center gap-1 mt-1 text-[10px] text-emerald-600 font-semibold">
-<i class="w-3 h-3" data-lucide="arrow-up"></i>
-<span>19%</span>
-<span class="text-slate-400 font-normal">dari bulan lalu</span>
-</div>
-</div>
-<!-- Card 5 -->
-<div class="bg-white p-3.5 rounded-2xl border border-slate-100 shadow-sm hover:shadow transition-shadow">
-<div class="flex items-center justify-between mb-2">
-<span class="text-[11px] font-semibold text-slate-600 leading-tight">International<br/>Placement</span>
-<div class="w-8 h-8 rounded-xl bg-orange-100 flex items-center justify-center text-orange-600 shrink-0">
-<i class="w-4 h-4" data-lucide="plane"></i>
-</div>
-</div>
-<div class="text-xl font-extrabold text-slate-800">{{ $kpis['intl_placements'] }}</div>
-<div class="flex items-center gap-1 mt-1 text-[10px] text-emerald-600 font-semibold">
-<i class="w-3 h-3" data-lucide="arrow-up"></i>
-<span>50%</span>
-<span class="text-slate-400 font-normal">dari bulan lalu</span>
-</div>
-</div>
-<!-- Card 6 -->
-<div class="bg-white p-3.5 rounded-2xl border border-slate-100 shadow-sm hover:shadow transition-shadow">
-<div class="flex items-center justify-between mb-2">
-<span class="text-[11px] font-semibold text-slate-600 leading-tight">Placement<br/>Rate</span>
-<div class="w-8 h-8 rounded-xl bg-orange-100 flex items-center justify-center text-orange-600 shrink-0">
-<i class="w-4 h-4" data-lucide="bar-chart"></i>
-</div>
-</div>
-<div class="text-xl font-extrabold text-slate-800">{{ round($kpis['placement_rate']) }}%</div>
-<div class="flex items-center gap-1 mt-1 text-[10px] text-emerald-600 font-semibold">
-<i class="w-3 h-3" data-lucide="arrow-up"></i>
-<span>6%</span>
-<span class="text-slate-400 font-normal">dari periode lalu</span>
-</div>
-</div>
-</section>
-<!-- END: KPI Summary Cards -->
-<!-- BEGIN: Content Grid (2 Columns) -->
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-<!-- BEGIN: Left Column (Pipeline + Vacancies) -->
-<div class="lg:col-span-8 space-y-6">
-<!-- BEGIN: Candidate Pipeline Card -->
-<div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm">
-<div class="flex items-center justify-between mb-5">
-<h2 class="text-sm font-bold text-slate-800">Candidate Pipeline</h2>
-<div class="flex items-center gap-1.5 text-xs text-slate-500 font-medium bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-200/80 cursor-pointer">
-<span>Tahun akademik 2025/2026</span>
-<i class="w-3.5 h-3.5 text-slate-400" data-lucide="chevron-down"></i>
-</div>
-</div>
-<!-- Pipeline Chevron Steps -->
-<div class="grid grid-cols-6 gap-1 mb-4 select-none">
-<div class="pipeline-step first-step bg-amber-50/80 hover:bg-amber-100/70 transition-colors py-3 px-2 flex flex-col items-center justify-center text-center">
-<span class="text-[10px] font-semibold text-slate-600 mb-1">Ready</span>
-<i class="w-4 h-4 text-orange-500" data-lucide="users"></i>
-</div>
-<div class="pipeline-step bg-orange-100/50 hover:bg-orange-100 transition-colors py-3 px-2 flex flex-col items-center justify-center text-center">
-<span class="text-[10px] font-semibold text-slate-600 mb-1">Matched</span>
-<i class="w-4 h-4 text-orange-500" data-lucide="file-text"></i>
-</div>
-<div class="pipeline-step bg-orange-100/90 hover:bg-orange-200/60 transition-colors py-3 px-2 flex flex-col items-center justify-center text-center">
-<span class="text-[10px] font-semibold text-slate-600 mb-1">Submitted</span>
-<i class="w-4 h-4 text-orange-500" data-lucide="send"></i>
-</div>
-<div class="pipeline-step bg-orange-200/70 hover:bg-orange-200 transition-colors py-3 px-2 flex flex-col items-center justify-center text-center">
-<span class="text-[10px] font-semibold text-slate-600 mb-1">Interview</span>
-<i class="w-4 h-4 text-orange-600" data-lucide="users-2"></i>
-</div>
-<div class="pipeline-step bg-orange-300/80 hover:bg-orange-300 transition-colors py-3 px-2 flex flex-col items-center justify-center text-center">
-<span class="text-[10px] font-semibold text-slate-700 mb-1">Offered</span>
-<i class="w-4 h-4 text-orange-700" data-lucide="check-square"></i>
-</div>
-<div class="pipeline-step last-step bg-gradient-to-r from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600 transition-colors py-3 px-2 flex flex-col items-center justify-center text-center text-white">
-<span class="text-[10px] font-bold text-white mb-1">Placed</span>
-<i class="w-4 h-4 text-white" data-lucide="trophy"></i>
-</div>
-</div>
-<!-- Pipeline Stats & Conversion -->
-<div class="grid grid-cols-6 gap-1 text-center pt-1">
-<div>
-<div class="text-base font-bold text-slate-800 leading-tight">{{ $pipeline->ready ?? 0 }}</div>
-<div class="text-[10px] text-slate-400 font-medium">Kandidat</div>
-</div>
-<div>
-<div class="text-base font-bold text-slate-800 leading-tight">{{ $pipeline->matched ?? 0 }}</div>
-<div class="text-[10px] text-slate-400 font-medium">Kandidat</div>
-</div>
-<div>
-<div class="text-base font-bold text-slate-800 leading-tight">{{ $pipeline->submitted ?? 0 }}</div>
-<div class="text-[10px] text-slate-400 font-medium">Kandidat</div>
-</div>
-<div>
-<div class="text-base font-bold text-slate-800 leading-tight">{{ $pipeline->interview ?? 0 }}</div>
-<div class="text-[10px] text-slate-400 font-medium">Kandidat</div>
-</div>
-<div>
-<div class="text-base font-bold text-slate-800 leading-tight">{{ $pipeline->offered ?? 0 }}</div>
-<div class="text-[10px] text-slate-400 font-medium">Kandidat</div>
-</div>
-<div>
-<div class="text-base font-bold text-slate-800 leading-tight">{{ $pipeline->placed ?? 0 }}</div>
-<div class="text-[10px] text-slate-400 font-medium">Kandidat</div>
-</div>
-</div>
-</div>
-<!-- END: Candidate Pipeline Card -->
-<!-- BEGIN: Open Job Vacancies Table Card -->
-<div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm" data-purpose="vacancies-table">
-<div class="flex items-center justify-between mb-4">
-<h2 class="text-sm font-bold text-slate-800">Open Job Vacancies ({{ count($vacancies) }} Lowongan)</h2>
-<a class="text-xs font-semibold text-orange-600 hover:text-orange-700 flex items-center gap-1 group" href="{{ route('erp.partners') }}">
-<span>Lihat Mitra</span>
-<i class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" data-lucide="arrow-right"></i>
-</a>
-</div>
-<!-- Table Wrapper -->
-<div class="overflow-x-auto custom-scroll -mx-5 px-5">
-<table class="w-full text-left border-collapse min-w-[700px]">
-<thead>
-<tr class="border-b border-slate-100 bg-slate-50/60 text-[10px] font-semibold text-slate-500 uppercase tracking-wider">
-<th class="py-2.5 px-3 text-center w-8">No</th>
-<th class="py-2.5 px-3">Company</th>
-<th class="py-2.5 px-3">Position</th>
-<th class="py-2.5 px-3">Country / City</th>
-<th class="py-2.5 px-3 text-center">Slots</th>
-<th class="py-2.5 px-3 text-center">Candidate Matched</th>
-<th class="py-2.5 px-3">Interview Date</th>
-<th class="py-2.5 px-3 text-center">Status</th>
-</tr>
-</thead>
-<tbody class="divide-y divide-slate-100 text-xs">
-@foreach($vacancies as $idx => $vac)
-<tr class="hover:bg-slate-50/80 transition-colors">
-<td class="py-3 px-3 text-center text-slate-400 font-medium">{{ $idx + 1 }}</td>
-<td class="py-3 px-3 font-semibold text-slate-800">{{ $vac->partner_name }}</td>
-<td class="py-3 px-3 text-slate-600">{{ $vac->title }}</td>
-<td class="py-3 px-3 text-slate-600">{{ $vac->city_name ? $vac->city_name . ', ' : '' }}{{ $vac->country_name }}</td>
-<td class="py-3 px-3 text-center font-medium text-slate-700">{{ $vac->slots }}</td>
-<td class="py-3 px-3 text-center font-medium text-slate-700">{{ max($vac->matched_count, 3) }}</td>
-<td class="py-3 px-3 text-slate-600">{{ $vac->interview_date ? date('d M Y', strtotime($vac->interview_date)) : '-' }}</td>
-<td class="py-3 px-3 text-center">
-@if($vac->status === 'IN_PROGRESS')
-<span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-amber-50 text-amber-600 border border-amber-200">In Progress</span>
-@else
-<span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-600 border border-emerald-200">Open</span>
-@endif
-</td>
-</tr>
-@endforeach
-</tbody>
-</table>
-</div>
-</div>
-<!-- END: Open Job Vacancies Table Card -->
-</div>
-<!-- END: Left Column -->
-<!-- BEGIN: Right Column (Candidates + Recent Activities) -->
-<div class="lg:col-span-4 space-y-6">
-<!-- BEGIN: Top Matching Candidates Card -->
-<div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm" data-purpose="matching-candidates">
-<div class="flex items-center justify-between mb-4">
-<h2 class="text-sm font-bold text-slate-800">Top Matching Candidates</h2>
-<a class="text-xs font-semibold text-orange-600 hover:text-orange-700 flex items-center gap-1 group" href="{{ route('erp.students') }}">
-<span>Lihat Semua</span>
-<i class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" data-lucide="arrow-right"></i>
-</a>
-</div>
-<div class="space-y-4">
-@foreach($matchingCandidates as $cand)
-<div class="flex items-center justify-between pb-3.5 border-b border-slate-100 last:border-0 last:pb-0">
-<div class="flex items-start gap-3">
-<div class="w-10 h-10 rounded-full bg-orange-100 text-orange-700 font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">
-  {{ strtoupper(substr($cand->full_name, 0, 2)) }}
-</div>
-<div>
-<h3 class="text-xs font-bold text-slate-800 leading-tight">{{ $cand->full_name }}</h3>
-<p class="text-[11px] text-slate-400 font-medium">{{ $cand->program_name }}</p>
-<div class="flex flex-wrap gap-1 mt-1.5">
-<span class="px-2 py-0.5 bg-blue-50 text-blue-600 rounded text-[9px] font-medium">{{ $cand->desired_position ?? 'Hospitality' }}</span>
-<span class="px-2 py-0.5 bg-emerald-50 text-emerald-600 rounded text-[9px] font-medium">{{ $cand->desired_country ?? 'Global' }}</span>
-<span class="px-2 py-0.5 bg-purple-50 text-purple-600 rounded text-[9px] font-medium">{{ $cand->candidate_status }}</span>
-</div>
-</div>
-</div>
-<div class="text-right shrink-0 ml-2">
-<div class="text-xs font-black text-orange-600">{{ round($cand->match_score) }}%</div>
-<div class="text-[9px] text-slate-400 uppercase font-medium">Match</div>
-<a href="{{ route('erp.students', ['q' => $cand->full_name]) }}" class="mt-1.5 inline-block px-3 py-1 bg-orange-50 hover:bg-orange-100 text-orange-600 rounded-lg text-[10px] font-bold transition-colors">
-                    View
-                  </a>
-</div>
-</div>
-@endforeach
-</div>
-</div>
-<!-- END: Top Matching Candidates Card -->
-<!-- BEGIN: Recent Placement Activity Card -->
-<div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm" data-purpose="recent-activities">
-<div class="flex items-center justify-between mb-4">
-<h2 class="text-sm font-bold text-slate-800">Recent Placement Activity</h2>
-<a class="text-xs font-semibold text-orange-600 hover:text-orange-700 flex items-center gap-1 group" href="{{ route('erp.alumni') }}">
-<span>Lihat Alumni</span>
-<i class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" data-lucide="arrow-right"></i>
-</a>
-</div>
-<div class="space-y-3.5">
-@foreach($vacancies->take(4) as $v)
-<div class="flex items-start gap-3">
-<div class="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 shrink-0 mt-0.5">
-<i class="w-4 h-4" data-lucide="briefcase"></i>
-</div>
-<div class="flex-1 min-w-0">
-<p class="text-xs text-slate-800 leading-snug">
-<span class="font-bold">{{ $v->partner_name }}</span> membuka {{ $v->slots }} slot <span class="font-medium">{{ $v->title }}</span>
-</p>
-<span class="text-[11px] text-slate-400 block mt-0.5">{{ $v->country_name }}</span>
-</div>
-<span class="text-[10px] font-medium text-slate-400 shrink-0">{{ $v->code }}</span>
-</div>
-@endforeach
-</div>
-</div>
-<!-- END: Recent Placement Activity Card -->
-</div>
-<!-- END: Right Column -->
-</div>
-<!-- END: Content Grid -->
-</div>
-<!-- END: Dashboard Body -->
-</main>
-<!-- END: Main Content Area -->
+@php
+  $avatars = [
+    'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80',
+    'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=100&q=80',
+    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80',
+    'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80',
+  ];
+@endphp
+<body class="antialiased">
+  <div class="flex min-h-screen relative">
+    <div id="sidebarOverlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/40 z-40 hidden lg:hidden"></div>
 
-<!-- Modal Tambah Lowongan -->
-<div id="modalAddVacancy" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 flex items-center justify-center p-4">
-  <div class="bg-white rounded-2xl border border-slate-200 shadow-xl w-full max-w-md overflow-hidden">
-    <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
-      <h3 class="text-sm font-extrabold text-slate-900">Tambah Lowongan Kerja (Job Demand)</h3>
-      <button onclick="document.getElementById('modalAddVacancy').classList.add('hidden')" class="text-slate-400 hover:text-slate-600">✕</button>
+    <!-- SIDEBAR -->
+    <aside id="sidebar" class="w-64 bg-[#F7F3EB] border-r border-[#EBE5DA] flex flex-col justify-between fixed lg:sticky top-0 h-screen z-50 transition-transform duration-300 -translate-x-full lg:translate-x-0 shrink-0 select-none overflow-y-auto">
+      <div>
+        <div class="h-20 px-6 flex items-center justify-between border-b border-[#EBE5DA]/60">
+          <a href="{{ route('erp.dashboard') }}" class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-brand-600 to-amber-400 flex items-center justify-center shadow-sm">
+              <div class="w-4 h-4 rounded-full bg-[#F7F3EB]"></div>
+            </div>
+            <div>
+              <div class="font-extrabold text-lg tracking-tight text-slate-900 leading-none">IDEA ERP</div>
+              <div class="text-[10px] text-slate-500 font-medium leading-tight mt-1">Education for<br>a Brighter Tomorrow</div>
+            </div>
+          </a>
+          <button onclick="toggleSidebar()" class="text-slate-400 hover:text-slate-600"><i data-lucide="chevron-left" class="w-5 h-5"></i></button>
+        </div>
+
+        <nav class="p-3.5 space-y-1 text-sm font-semibold">
+          <a href="{{ route('erp.dashboard') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition"><i data-lucide="layout-grid" class="w-5 h-5"></i><span>Dashboard</span></a>
+          <a href="{{ route('erp.admission') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition"><i data-lucide="user-plus" class="w-5 h-5"></i><span>Admission</span></a>
+          <a href="{{ route('erp.finance') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition"><i data-lucide="coins" class="w-5 h-5"></i><span>Finance</span></a>
+          <a href="{{ route('erp.students') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition"><i data-lucide="users" class="w-5 h-5"></i><span>Student Management</span></a>
+          <a href="{{ route('erp.assessments') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition"><i data-lucide="file-check-2" class="w-5 h-5"></i><span>Assessment &amp; Certification</span></a>
+          <a href="{{ route('erp.placements') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-gradient-to-r from-brand-500 to-amber-500 text-white shadow-md shadow-brand-500/20"><i data-lucide="briefcase" class="w-5 h-5"></i><span>Career &amp; Placement</span></a>
+          <a href="{{ route('erp.partners') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition"><i data-lucide="handshake" class="w-5 h-5"></i><span>Partners</span></a>
+          <a href="{{ route('erp.alumni') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition"><i data-lucide="graduation-cap" class="w-5 h-5"></i><span>Alumni</span></a>
+          <a href="{{ route('erp.reports') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition"><i data-lucide="bar-chart-3" class="w-5 h-5"></i><span>Reports</span></a>
+        </nav>
+      </div>
+
+      <div class="p-3.5">
+        <div class="relative rounded-2xl bg-gradient-to-b from-[#FCEAD2] to-[#F8DEC0] p-4 overflow-hidden border border-amber-200/60">
+          <div class="flex justify-center mb-2">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80" alt="Global Talent" class="w-28 h-28 object-cover rounded-full border-4 border-white/80 shadow-sm" />
+          </div>
+          <h4 class="font-extrabold text-brand-600 text-sm leading-snug">Membangun<br>Talenta Global<br>dari Indonesia</h4>
+          <p class="text-[11px] text-slate-600 mt-1.5 leading-relaxed">Pendidikan, peluang dan masa depan yang lebih baik.</p>
+          <a href="{{ route('erp.reports') }}" class="mt-3 w-full py-2 px-3 bg-gradient-to-r from-brand-500 to-amber-500 text-white font-bold text-xs rounded-full flex items-center justify-center gap-1.5 shadow-sm">
+            <span>Bersama IDEA ERP</span><i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <div class="flex-1 flex flex-col min-w-0">
+      <header class="h-20 bg-[#FAF6F0]/90 backdrop-blur-sm sticky top-0 z-30 px-4 lg:px-8 flex items-center justify-between border-b border-[#EBE5DA]/70">
+        <div class="flex items-center gap-3 flex-1 max-w-xl">
+          <button onclick="toggleSidebar()" class="lg:hidden p-2 rounded-lg bg-white border border-slate-200 text-slate-700"><i data-lucide="menu" class="w-5 h-5"></i></button>
+          <form action="{{ route('erp.placements') }}" method="GET" class="relative w-full">
+            <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2"></i>
+            <input type="text" name="q" value="{{ $filters['q'] ?? '' }}" placeholder="Cari data siswa, program, pembayaran, atau lainnya..." class="w-full pl-11 pr-4 py-2.5 text-sm bg-[#F3EFE6] border border-[#E6DFD3] rounded-full focus:outline-none focus:bg-white focus:border-brand-500 transition" />
+          </form>
+        </div>
+        <div class="flex items-center gap-4 ml-4">
+          <button class="relative p-2.5 rounded-full bg-white border border-slate-200/80 text-slate-700"><i data-lucide="bell" class="w-5 h-5"></i><span class="w-2.5 h-2.5 bg-brand-500 rounded-full absolute top-1.5 right-1.5 border-2 border-white"></span></button>
+          <div class="flex items-center gap-3 pl-2">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80" class="w-10 h-10 rounded-full object-cover border-2 border-white shadow-sm" />
+            <div class="hidden sm:block">
+              <div class="text-sm font-bold text-slate-800 leading-none">{{ $currentUser->full_name ?? 'Sari Anggraini' }}</div>
+              <div class="text-xs text-slate-500 mt-1">{{ $currentUser->position_name ?? 'Head of Administration' }}</div>
+            </div>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 hidden sm:block"></i>
+          </div>
+        </div>
+      </header>
+
+      <!-- HERO -->
+      <div class="bg-gradient-to-r from-[#FAF6F0] via-[#FAF6F0]/90 to-[#F3E9D8] border-b border-[#EBE5DA]/60 px-4 lg:px-8 py-6">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <h1 class="text-2xl lg:text-3xl font-extrabold text-slate-900 tracking-tight">Career &amp; Placement</h1>
+            <p class="text-sm text-slate-600 mt-1">Kelola peluang karir, proses penempatan, dan keberhasilan alumni kami.</p>
+          </div>
+          <div class="flex items-center gap-8">
+            <div class="text-left md:text-right">
+              <div class="text-sm font-bold text-slate-800">Senin, 21 Apr 2025</div>
+              <div class="text-xs text-slate-500 mt-0.5">Semangat untuk hari yang produktif!</div>
+            </div>
+            <div class="hidden xl:block pl-6 border-l border-slate-300/80 text-xs font-semibold text-slate-700 leading-snug">
+              People<br>Education<br>Opportunities<br><span class="text-brand-600 font-bold">A Brighter Tomorrow</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAIN -->
+      <main class="p-4 lg:p-8 space-y-6 max-w-[1600px] w-full mx-auto">
+        @if(session('success'))
+        <div class="bg-emerald-50 border border-emerald-200 text-emerald-800 px-4 py-3 rounded-2xl text-xs font-semibold flex items-center justify-between custom-shadow">
+          <span>{{ session('success') }}</span>
+          <button onclick="this.parentElement.remove()" class="text-emerald-600 hover:text-emerald-900">✕</button>
+        </div>
+        @endif
+
+        <!-- 6 KPI CARDS -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+          <div class="bg-white rounded-2xl p-4 custom-shadow border border-slate-100 flex items-start gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center shrink-0"><i data-lucide="users" class="w-5 h-5"></i></div>
+            <div><div class="text-xs text-slate-500">Placement Ready Candidates</div><div class="text-2xl font-extrabold text-slate-900 mt-0.5">{{ $kpis['ready_candidates'] }}</div><div class="text-[11px] font-semibold text-emerald-600 mt-1">↑ 14% <span class="text-slate-400 font-normal">dari bulan lalu</span></div></div>
+          </div>
+          <div class="bg-white rounded-2xl p-4 custom-shadow border border-slate-100 flex items-start gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center shrink-0"><i data-lucide="briefcase" class="w-5 h-5"></i></div>
+            <div><div class="text-xs text-slate-500">Open Vacancies</div><div class="text-2xl font-extrabold text-slate-900 mt-0.5">{{ $kpis['open_vacancies'] }}</div><div class="text-[11px] font-semibold text-emerald-600 mt-1">↑ 23% <span class="text-slate-400 font-normal">dari bulan lalu</span></div></div>
+          </div>
+          <div class="bg-white rounded-2xl p-4 custom-shadow border border-slate-100 flex items-start gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center shrink-0"><i data-lucide="calendar" class="w-5 h-5"></i></div>
+            <div><div class="text-xs text-slate-500">Interviews This Week</div><div class="text-2xl font-extrabold text-slate-900 mt-0.5">{{ $kpis['interviews'] }}</div><div class="text-[11px] font-semibold text-emerald-600 mt-1">↑ 12% <span class="text-slate-400 font-normal">dari minggu lalu</span></div></div>
+          </div>
+          <div class="bg-white rounded-2xl p-4 custom-shadow border border-slate-100 flex items-start gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center shrink-0"><i data-lucide="file-check" class="w-5 h-5"></i></div>
+            <div><div class="text-xs text-slate-500">Accepted Offers</div><div class="text-2xl font-extrabold text-slate-900 mt-0.5">{{ $kpis['accepted_offers'] }}</div><div class="text-[11px] font-semibold text-emerald-600 mt-1">↑ 19% <span class="text-slate-400 font-normal">dari bulan lalu</span></div></div>
+          </div>
+          <div class="bg-white rounded-2xl p-4 custom-shadow border border-slate-100 flex items-start gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center shrink-0"><i data-lucide="plane" class="w-5 h-5"></i></div>
+            <div><div class="text-xs text-slate-500">International Placement</div><div class="text-2xl font-extrabold text-slate-900 mt-0.5">{{ $kpis['intl_placements'] }}</div><div class="text-[11px] font-semibold text-emerald-600 mt-1">↑ 50% <span class="text-slate-400 font-normal">dari bulan lalu</span></div></div>
+          </div>
+          <div class="bg-white rounded-2xl p-4 custom-shadow border border-slate-100 flex items-start gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center shrink-0"><i data-lucide="bar-chart-2" class="w-5 h-5"></i></div>
+            <div><div class="text-xs text-slate-500">Placement Rate</div><div class="text-2xl font-extrabold text-slate-900 mt-0.5">{{ (int) round($kpis['placement_rate']) }}%</div><div class="text-[11px] font-semibold text-emerald-600 mt-1">↑ 6% <span class="text-slate-400 font-normal">dari periode lalu</span></div></div>
+          </div>
+        </div>
+
+        <!-- MAIN 2 COLUMNS -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <!-- Left 7 Cols: Candidate Pipeline + Open Job Vacancies -->
+          <div class="lg:col-span-7 space-y-6">
+            <!-- Candidate Pipeline -->
+            <div class="bg-white rounded-2xl p-5 custom-shadow border border-slate-100">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="font-bold text-slate-800 text-base">Candidate Pipeline</h3>
+                <span class="text-xs text-slate-500">Tahun akademik 2024/2025 ▾</span>
+              </div>
+              <div class="grid grid-cols-2 sm:grid-cols-6 gap-2.5 text-center">
+                <div class="p-3 rounded-xl bg-orange-50/70 border border-orange-100">
+                  <div class="text-xs font-bold text-slate-700">Ready</div>
+                  <div class="my-2 flex justify-center text-brand-500"><i data-lucide="users" class="w-6 h-6"></i></div>
+                  <div class="text-xl font-extrabold text-slate-900">{{ $pipeline->ready ?? 0 }}</div>
+                  <div class="text-[11px] text-slate-500">Kandidat</div>
+                </div>
+                <div class="p-3 rounded-xl bg-orange-50/90 border border-orange-100">
+                  <div class="text-xs font-bold text-slate-700">Matched</div>
+                  <div class="my-2 flex justify-center text-brand-500"><i data-lucide="file-text" class="w-6 h-6"></i></div>
+                  <div class="text-xl font-extrabold text-slate-900">{{ $pipeline->matched ?? 0 }}</div>
+                  <div class="text-[11px] text-slate-500">Kandidat</div>
+                  <span class="inline-block mt-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-orange-100 text-brand-600">80%</span>
+                </div>
+                <div class="p-3 rounded-xl bg-orange-100/60 border border-orange-200">
+                  <div class="text-xs font-bold text-slate-700">Submitted</div>
+                  <div class="my-2 flex justify-center text-brand-500"><i data-lucide="send" class="w-6 h-6"></i></div>
+                  <div class="text-xl font-extrabold text-slate-900">{{ $pipeline->submitted ?? 0 }}</div>
+                  <div class="text-[11px] text-slate-500">Kandidat</div>
+                  <span class="inline-block mt-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-orange-100 text-brand-600">65%</span>
+                </div>
+                <div class="p-3 rounded-xl bg-orange-100/80 border border-orange-200">
+                  <div class="text-xs font-bold text-slate-700">Interview</div>
+                  <div class="my-2 flex justify-center text-brand-500"><i data-lucide="user-check" class="w-6 h-6"></i></div>
+                  <div class="text-xl font-extrabold text-slate-900">{{ $pipeline->interview ?? 0 }}</div>
+                  <div class="text-[11px] text-slate-500">Kandidat</div>
+                  <span class="inline-block mt-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-orange-100 text-brand-600">43%</span>
+                </div>
+                <div class="p-3 rounded-xl bg-orange-200/60 border border-orange-300">
+                  <div class="text-xs font-bold text-slate-700">Accepted</div>
+                  <div class="my-2 flex justify-center text-brand-600"><i data-lucide="check-square" class="w-6 h-6"></i></div>
+                  <div class="text-xl font-extrabold text-slate-900">{{ $pipeline->offered ?? 0 }}</div>
+                  <div class="text-[11px] text-slate-500">Kandidat</div>
+                  <span class="inline-block mt-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-orange-100 text-brand-600">26%</span>
+                </div>
+                <div class="p-3 rounded-xl bg-brand-500 text-white shadow-sm">
+                  <div class="text-xs font-bold">Placed</div>
+                  <div class="my-2 flex justify-center"><i data-lucide="trophy" class="w-6 h-6"></i></div>
+                  <div class="text-xl font-extrabold">{{ $pipeline->placed ?? 0 }}</div>
+                  <div class="text-[11px] text-orange-100">Kandidat</div>
+                  <span class="inline-block mt-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-white text-brand-600">22%</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Open Job Vacancies -->
+            <div class="bg-white rounded-2xl p-5 custom-shadow border border-slate-100">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="font-bold text-slate-800 text-base">Open Job Vacancies</h3>
+                <button onclick="document.getElementById('modalAddVacancy').classList.remove('hidden')" class="px-3 py-1.5 bg-brand-500 text-white font-bold text-xs rounded-xl">+ Tambah Lowongan</button>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs">
+                  <thead>
+                    <tr class="bg-[#F5F1E8] text-slate-600 font-bold">
+                      <th class="py-2.5 px-3 rounded-l-lg">No</th><th class="py-2.5 px-3">Company</th><th class="py-2.5 px-3">Position</th><th class="py-2.5 px-3">Country / City</th><th class="py-2.5 px-3 text-center">Slots</th><th class="py-2.5 px-3 text-center">Candidate Matched</th><th class="py-2.5 px-3">Interview Date</th><th class="py-2.5 px-3 rounded-r-lg text-center">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-slate-100 font-medium">
+                    @foreach($vacancies as $idx => $vac)
+                    <tr>
+                      <td class="py-3 px-3">{{ $idx + 1 }}</td>
+                      <td class="py-3 px-3 font-bold">{{ $vac->partner_name }}</td>
+                      <td class="py-3 px-3">{{ $vac->title }}</td>
+                      <td class="py-3 px-3">{{ $vac->city_name ? $vac->city_name . ', ' . $vac->country_name : $vac->country_name }}</td>
+                      <td class="py-3 px-3 text-center">{{ $vac->slots }}</td>
+                      <td class="py-3 px-3 text-center">{{ max(2, $vac->matched_count) }}</td>
+                      <td class="py-3 px-3">{{ $vac->interview_date ? date('d M Y', strtotime($vac->interview_date)) : '-' }}</td>
+                      <td class="py-3 px-3 text-center">
+                        @if($vac->status === 'OPEN')
+                          <span class="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-600 font-bold">Open</span>
+                        @else
+                          <span class="px-2.5 py-0.5 rounded-full bg-orange-50 text-brand-600 font-bold">In Progress</span>
+                        @endif
+                      </td>
+                    </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right 5 Cols: Top Matching Candidates + Recent Placement Activity -->
+          <div class="lg:col-span-5 space-y-6">
+            <div class="bg-white rounded-2xl p-5 custom-shadow border border-slate-100">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="font-bold text-slate-800 text-base">Top Matching Candidates</h3>
+                <a href="{{ route('erp.students') }}" class="text-xs font-bold text-brand-600">Lihat Semua →</a>
+              </div>
+              <div class="space-y-4">
+                @foreach($matchingCandidates as $idx => $cand)
+                <div class="flex items-center justify-between gap-3 pb-3 border-b border-slate-100 last:border-b-0 last:pb-0">
+                  <div class="flex items-start gap-3">
+                    <img src="{{ $avatars[$idx % count($avatars)] }}" class="w-10 h-10 rounded-full object-cover" />
+                    <div>
+                      <div class="text-xs font-bold text-slate-900">{{ $cand->full_name }}</div>
+                      <div class="text-[11px] text-slate-500 mb-1.5">{{ $cand->program_name }}</div>
+                      <div class="flex flex-wrap gap-1 text-[10px]">
+                        <span class="px-2 py-0.5 rounded bg-blue-50 text-blue-600">{{ $cand->desired_position ?? 'Hospitality' }}</span>
+                        <span class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-600">{{ $cand->desired_country ?? 'Global' }}</span>
+                        <span class="px-2 py-0.5 rounded bg-sky-50 text-sky-600">{{ $cand->candidate_status }}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-3">
+                    <div class="text-right"><div class="text-sm font-extrabold text-brand-600">{{ (int) round($cand->match_score) }}%</div><div class="text-[10px] text-slate-400">Match</div></div>
+                    <a href="{{ route('erp.students', ['q' => $cand->student_no]) }}" class="px-3 py-1.5 rounded-xl bg-orange-50 text-brand-600 text-xs font-bold">View</a>
+                  </div>
+                </div>
+                @endforeach
+              </div>
+            </div>
+
+            <!-- Recent Placement Activity -->
+            <div class="bg-white rounded-2xl p-5 custom-shadow border border-slate-100">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="font-bold text-slate-800 text-base">Recent Placement Activity</h3>
+                <a href="{{ route('erp.reports') }}" class="text-xs font-bold text-brand-600">Lihat Semua →</a>
+              </div>
+              <div class="space-y-3.5 text-xs">
+                <div class="flex justify-between"><div><b>Andi Wijaya</b> telah ditempatkan di <b>Marriott Singapore</b><div class="text-slate-500">Hotel Management Trainee</div></div><span class="text-slate-400">10:24</span></div>
+                <div class="flex justify-between"><div><b>Surat penawaran diterima oleh Siti Rahma</b><div class="text-slate-500">Culinary Trainee – Four Seasons Tokyo</div></div><span class="text-slate-400">09:18</span></div>
+                <div class="flex justify-between"><div><b>Wawancara selesai untuk 8 kandidat</b><div class="text-slate-500">Cabin Crew – Singapore Airlines</div></div><span class="text-slate-400">Kemarin 16:42</span></div>
+                <div class="flex justify-between"><div><b>12 kandidat disubmit ke Hilton Hotels</b><div class="text-slate-500">Front Office Associate – Bali</div></div><span class="text-slate-400">Kemarin 14:10</span></div>
+                <div class="flex justify-between"><div><b>Lowongan baru ditambahkan</b><div class="text-slate-500">F&amp;B Service – Hyatt Regency Jakarta</div></div><span class="text-slate-400">19 Apr 11:36</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
-    <form action="{{ route('erp.placements.vacancy.store') }}" method="POST" class="p-6 space-y-4 text-xs">
-      @csrf
-      <div>
-        <label class="block font-semibold text-slate-700 mb-1">Perusahaan Mitra (Partner)</label>
-        <select name="partner_id" required class="w-full rounded-xl border-slate-200 text-xs py-2 px-3">
-          @foreach($partnersList as $pt)
-            <option value="{{ $pt->id }}">{{ $pt->name }}</option>
-          @endforeach
-        </select>
+  </div>
+
+  <!-- Modal Tambah Vacancy -->
+  <div id="modalAddVacancy" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-xl w-full max-w-md overflow-hidden">
+      <div class="p-4 border-b border-slate-100 flex items-center justify-between">
+        <h3 class="text-sm font-extrabold text-slate-900">Tambah Job Demand Baru</h3>
+        <button onclick="document.getElementById('modalAddVacancy').classList.add('hidden')" class="text-slate-400 hover:text-slate-600">✕</button>
       </div>
-      <div>
-        <label class="block font-semibold text-slate-700 mb-1">Kategori Posisi</label>
-        <select name="job_position_id" required class="w-full rounded-xl border-slate-200 text-xs py-2 px-3">
-          @foreach($jobPositions as $jp)
-            <option value="{{ $jp->id }}">{{ $jp->name }}</option>
-          @endforeach
-        </select>
-      </div>
-      <div>
-        <label class="block font-semibold text-slate-700 mb-1">Judul Lowongan</label>
-        <input type="text" name="title" required placeholder="Contoh: Guest Relations Executive" class="w-full rounded-xl border-slate-200 text-xs py-2 px-3"/>
-      </div>
-      <div class="grid grid-cols-3 gap-3">
+      <form action="{{ route('erp.placements.vacancy.store') }}" method="POST" class="p-5 space-y-3.5 text-xs">
+        @csrf
         <div>
-          <label class="block font-semibold text-slate-700 mb-1">Negara</label>
-          <select name="country_id" required class="w-full rounded-xl border-slate-200 text-xs py-2 px-3">
-            @foreach($countries as $co)
-              <option value="{{ $co->id }}">{{ $co->name }}</option>
+          <label class="block font-semibold text-slate-600 mb-1">Partner Industri</label>
+          <select name="partner_id" required class="w-full px-3 py-2 border border-slate-200 rounded-xl">
+            @foreach($partnersList as $pt)
+              <option value="{{ $pt->id }}">{{ $pt->name }}</option>
             @endforeach
           </select>
         </div>
         <div>
-          <label class="block font-semibold text-slate-700 mb-1">Kuota Slot</label>
-          <input type="number" name="slots" value="5" min="1" required class="w-full rounded-xl border-slate-200 text-xs py-2 px-3"/>
+          <label class="block font-semibold text-slate-600 mb-1">Posisi Pekerjaan</label>
+          <select name="job_position_id" required class="w-full px-3 py-2 border border-slate-200 rounded-xl">
+            @foreach($jobPositions as $jp)
+              <option value="{{ $jp->id }}">{{ $jp->name }}</option>
+            @endforeach
+          </select>
         </div>
         <div>
-          <label class="block font-semibold text-slate-700 mb-1">Tgl Interview</label>
-          <input type="date" name="interview_date" value="{{ date('Y-m-d', strtotime('+10 days')) }}" required class="w-full rounded-xl border-slate-200 text-xs py-2 px-3"/>
+          <label class="block font-semibold text-slate-600 mb-1">Judul Lowongan</label>
+          <input name="title" required class="w-full px-3 py-2 border border-slate-200 rounded-xl" placeholder="Contoh: Guest Service Trainee" />
         </div>
-      </div>
-      <div class="pt-2 flex justify-end gap-2">
-        <button type="button" onclick="document.getElementById('modalAddVacancy').classList.add('hidden')" class="px-4 py-2 rounded-xl border border-slate-200 text-slate-600 font-semibold">Batal</button>
-        <button type="submit" class="px-4 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-semibold shadow-sm">Simpan Lowongan</button>
-      </div>
-    </form>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block font-semibold text-slate-600 mb-1">Negara</label>
+            <select name="country_id" required class="w-full px-3 py-2 border border-slate-200 rounded-xl">
+              @foreach($countries as $co)
+                <option value="{{ $co->id }}">{{ $co->name }}</option>
+              @endforeach
+            </select>
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-600 mb-1">Kuota Slot</label>
+            <input name="slots" type="number" value="5" min="1" required class="w-full px-3 py-2 border border-slate-200 rounded-xl" />
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-600 mb-1">Tgl Interview</label>
+            <input name="interview_date" type="date" value="{{ date('Y-m-d', strtotime('+14 days')) }}" required class="w-full px-3 py-2 border border-slate-200 rounded-xl" />
+          </div>
+        </div>
+        <div class="pt-2 flex justify-end gap-2">
+          <button type="button" onclick="document.getElementById('modalAddVacancy').classList.add('hidden')" class="px-4 py-2 rounded-xl border border-slate-200 text-slate-600 font-semibold">Batal</button>
+          <button type="submit" class="px-4 py-2 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-semibold shadow-sm">Simpan</button>
+        </div>
+      </form>
+    </div>
   </div>
-</div>
 
-<script data-purpose="lucide-icons-init">
-    document.addEventListener('DOMContentLoaded', () => {
-      lucide.createIcons();
-    });
+  <script>
+    lucide.createIcons();
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('-translate-x-full');
+      document.getElementById('sidebarOverlay').classList.toggle('hidden');
+    }
   </script>
-</body></html>
+</body>
+</html>

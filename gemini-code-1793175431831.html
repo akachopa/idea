@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IDEA ERP - Industry Partners</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
+          colors: {
+            brand: { 50: '#FFF7ED', 100: '#FFEDD5', 500: '#F97316', 600: '#EA580C' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #FAF6F0; color: #1E293B; }
+    .custom-shadow { box-shadow: 0 2px 10px -2px rgba(0, 0, 0, 0.04), 0 1px 3px -1px rgba(0, 0, 0, 0.02); }
+  </style>
+</head>
+<body class="antialiased">
+  <div class="flex min-h-screen relative">
+    <div id="sidebarOverlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/40 z-40 hidden lg:hidden"></div>
+
+    <!-- SIDEBAR -->
+    <aside id="sidebar" class="w-64 bg-[#F7F3EB] border-r border-[#EBE5DA] flex flex-col justify-between fixed lg:sticky top-0 h-screen z-50 transition-transform duration-300 -translate-x-full lg:translate-x-0 shrink-0 select-none">
+      <div>
+        <div class="h-20 px-6 flex items-center justify-between border-b border-[#EBE5DA]/60">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-brand-600 to-amber-400 flex items-center justify-center shadow-sm">
+              <div class="w-4 h-4 rounded-full bg-[#F7F3EB]"></div>
+            </div>
+            <div>
+              <div class="font-extrabold text-lg tracking-tight text-slate-900 leading-none">IDEA ERP</div>
+              <div class="text-[10px] text-slate-500 font-medium leading-tight mt-1">Education for<br>a Brighter Tomorrow</div>
+            </div>
+          </div>
+          <button onclick="toggleSidebar()" class="text-slate-400 hover:text-slate-600"><i data-lucide="chevron-left" class="w-5 h-5"></i></button>
+        </div>
+
+        <nav class="p-3.5 space-y-1 text-sm font-semibold">
+          <a href="dashboard.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition"><i data-lucide="layout-grid" class="w-5 h-5"></i><span>Dashboard</span></a>
+          <a href="admission.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition"><i data-lucide="user-plus" class="w-5 h-5"></i><span>Admission</span></a>
+          <a href="finance.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition"><i data-lucide="coins" class="w-5 h-5"></i><span>Finance</span></a>
+          <a href="student-management.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition"><i data-lucide="users" class="w-5 h-5"></i><span>Student Management</span></a>
+          <a href="assessment.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition"><i data-lucide="file-check-2" class="w-5 h-5"></i><span>Assessment & Certification</span></a>
+          <a href="career-placement.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition"><i data-lucide="briefcase" class="w-5 h-5"></i><span>Career & Placement</span></a>
+          <a href="partners.html" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-gradient-to-r from-brand-500 to-amber-500 text-white shadow-md shadow-brand-500/20"><i data-lucide="handshake" class="w-5 h-5"></i><span>Partners</span></a>
+          <a href="alumni.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition"><i data-lucide="graduation-cap" class="w-5 h-5"></i><span>Alumni</span></a>
+          <a href="reports.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition"><i data-lucide="bar-chart-3" class="w-5 h-5"></i><span>Reports</span></a>
+        </nav>
+      </div>
+
+      <div class="p-3.5">
+        <div class="relative rounded-2xl bg-gradient-to-b from-[#FCEAD2] to-[#F8DEC0] p-4 overflow-hidden border border-amber-200/60">
+          <div class="flex justify-center mb-2">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80" alt="Global Talent" class="w-28 h-28 object-cover rounded-full border-4 border-white/80 shadow-sm" />
+          </div>
+          <h4 class="font-extrabold text-brand-600 text-sm leading-snug">Membangun<br>Talenta Global<br>dari Indonesia</h4>
+          <p class="text-[11px] text-slate-600 mt-1.5 leading-relaxed">Pendidikan, peluang dan masa depan yang lebih baik.</p>
+          <button class="mt-3 w-full py-2 px-3 bg-gradient-to-r from-brand-500 to-amber-500 text-white font-bold text-xs rounded-full flex items-center justify-center gap-1.5 shadow-sm">
+            <span>Bersama IDEA ERP</span><i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <div class="flex-1 flex flex-col min-w-0">
+      <header class="h-20 bg-[#FAF6F0]/90 backdrop-blur-sm sticky top-0 z-30 px-4 lg:px-8 flex items-center justify-between border-b border-[#EBE5DA]/70">
+        <div class="flex items-center gap-3 flex-1 max-w-xl">
+          <button onclick="toggleSidebar()" class="lg:hidden p-2 rounded-lg bg-white border border-slate-200 text-slate-700"><i data-lucide="menu" class="w-5 h-5"></i></button>
+          <div class="relative w-full">
+            <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2"></i>
+            <input type="text" placeholder="Cari data siswa, program, pembayaran, atau lainnya..." class="w-full pl-11 pr-4 py-2.5 text-sm bg-[#F3EFE6] border border-[#E6DFD3] rounded-full focus:outline-none focus:bg-white focus:border-brand-500 transition" />
+          </div>
+        </div>
+        <div class="flex items-center gap-4 ml-4">
+          <button class="relative p-2.5 rounded-full bg-white border border-slate-200/80 text-slate-700"><i data-lucide="bell" class="w-5 h-5"></i><span class="w-2.5 h-2.5 bg-brand-500 rounded-full absolute top-1.5 right-1.5 border-2 border-white"></span></button>
+          <div class="flex items-center gap-3 pl-2">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80" class="w-10 h-10 rounded-full object-cover border-2 border-white shadow-sm" />
+            <div class="hidden sm:block">
+              <div class="text-sm font-bold text-slate-800 leading-none">Sari Anggraini</div>
+              <div class="text-xs text-slate-500 mt-1">Head of Administration</div>
+            </div>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 hidden sm:block"></i>
+          </div>
+        </div>
+      </header>
+
+      <!-- HERO -->
+      <div class="bg-gradient-to-r from-[#FAF6F0] via-[#FAF6F0]/90 to-[#F3E9D8] border-b border-[#EBE5DA]/60 px-4 lg:px-8 py-6">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <h1 class="text-2xl lg:text-3xl font-extrabold text-slate-900 tracking-tight">Industry Partners</h1>
+            <p class="text-sm text-slate-600 mt-1">Kelola kemitraan industri, peluang kerja, dan kolaborasi untuk penempatan siswa.</p>
+          </div>
+          <div class="flex items-center gap-8">
+            <div class="text-left md:text-right">
+              <div class="text-sm font-bold text-slate-800">Senin, 21 Apr 2025</div>
+              <div class="text-xs text-slate-500 mt-0.5">Memperluas jaringan untuk masa depan yang lebih cerah.</div>
+            </div>
+            <div class="hidden xl:block pl-6 border-l border-slate-300/80 text-xs font-semibold text-slate-700 leading-snug">
+              Global<br>Partners<br>Local Talents<br><span class="text-brand-600 font-bold">A Brighter Tomorrow</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAIN -->
+      <main class="p-4 lg:p-8 space-y-6 max-w-[1600px] w-full mx-auto">
+        <!-- 6 KPI CARDS -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+          <div class="bg-white rounded-2xl p-4 custom-shadow border border-slate-100 flex items-start gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center shrink-0"><i data-lucide="users" class="w-5 h-5"></i></div>
+            <div><div class="text-xs text-slate-500">Total Partners</div><div class="text-2xl font-extrabold text-slate-900 mt-0.5">124</div><div class="text-[11px] font-semibold text-emerald-600 mt-1">↑ 12% <span class="text-slate-400 font-normal">dari tahun lalu</span></div></div>
+          </div>
+          <div class="bg-white rounded-2xl p-4 custom-shadow border border-slate-100 flex items-start gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center shrink-0"><i data-lucide="briefcase" class="w-5 h-5"></i></div>
+            <div><div class="text-xs text-slate-500">Active Hiring Partners</div><div class="text-2xl font-extrabold text-slate-900 mt-0.5">86</div><div class="text-[11px] font-semibold text-emerald-600 mt-1">↑ 8% <span class="text-slate-400 font-normal">dari tahun lalu</span></div></div>
+          </div>
+          <div class="bg-white rounded-2xl p-4 custom-shadow border border-slate-100 flex items-start gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center shrink-0"><i data-lucide="file-text" class="w-5 h-5"></i></div>
+            <div><div class="text-xs text-slate-500">Open Job Demands</div><div class="text-2xl font-extrabold text-slate-900 mt-0.5">276</div><div class="text-[11px] font-semibold text-emerald-600 mt-1">↑ 25% <span class="text-slate-400 font-normal">dari tahun lalu</span></div></div>
+          </div>
+          <div class="bg-white rounded-2xl p-4 custom-shadow border border-slate-100 flex items-start gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center shrink-0"><i data-lucide="bar-chart-2" class="w-5 h-5"></i></div>
+            <div><div class="text-xs text-slate-500">Placement This Year</div><div class="text-2xl font-extrabold text-slate-900 mt-0.5">492</div><div class="text-[11px] font-semibold text-emerald-600 mt-1">↑ 18% <span class="text-slate-400 font-normal">dari tahun lalu</span></div></div>
+          </div>
+          <div class="bg-white rounded-2xl p-4 custom-shadow border border-slate-100 flex items-start gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center shrink-0"><i data-lucide="globe" class="w-5 h-5"></i></div>
+            <div><div class="text-xs text-slate-500">International Partners</div><div class="text-2xl font-extrabold text-slate-900 mt-0.5">38</div><div class="text-[11px] font-semibold text-emerald-600 mt-1">↑ 19% <span class="text-slate-400 font-normal">dari tahun lalu</span></div></div>
+          </div>
+          <div class="bg-white rounded-2xl p-4 custom-shadow border border-slate-100 flex items-start gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center shrink-0"><i data-lucide="calendar-clock" class="w-5 h-5"></i></div>
+            <div><div class="text-xs text-slate-500">Partnership Renewal Due</div><div class="text-2xl font-extrabold text-slate-900 mt-0.5">15</div><div class="text-[11px] font-semibold text-red-500 mt-1">↑ 50% <span class="text-slate-400 font-normal">dalam 3 bulan</span></div></div>
+          </div>
+        </div>
+
+        <!-- ROW 2: DISTRIBUSI PARTNER & TOP PERFORMING PARTNERS -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <div class="lg:col-span-7 bg-white rounded-2xl p-5 custom-shadow border border-slate-100">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-5">
+              <h3 class="font-bold text-slate-800 text-base">Distribusi Partner berdasarkan Kategori</h3>
+              <div class="flex items-center gap-3 text-xs">
+                <span class="text-slate-500">Total <b class="text-slate-800">124 Partners</b></span>
+                <select class="px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-xl font-semibold"><option>Tahun Ini</option></select>
+              </div>
+            </div>
+            <div class="flex flex-col sm:flex-row items-center justify-around gap-6 py-2">
+              <div class="w-44 h-44 rounded-full flex items-center justify-center shrink-0" style="background: conic-gradient(#F97316 0% 36%, #FB923C 36% 58%, #FDBA74 58% 76%, #38BDF8 76% 90%, #A855F7 90% 100%);">
+                <div class="w-28 h-28 bg-white rounded-full flex flex-col items-center justify-center text-center shadow-inner">
+                  <span class="text-2xl font-extrabold text-slate-900">124</span>
+                  <span class="text-xs text-slate-500">Partners</span>
+                </div>
+              </div>
+              <div class="w-full sm:w-72 space-y-3 text-xs">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-2"><span class="flex items-center gap-2.5"><span class="w-3 h-3 rounded-full bg-brand-500"></span>Hotel</span><div class="flex gap-6"><b>45</b><span class="text-slate-400 w-8 text-right">36%</span></div></div>
+                <div class="flex items-center justify-between border-b border-slate-100 pb-2"><span class="flex items-center gap-2.5"><span class="w-3 h-3 rounded-full bg-orange-400"></span>Restaurant</span><div class="flex gap-6"><b>27</b><span class="text-slate-400 w-8 text-right">22%</span></div></div>
+                <div class="flex items-center justify-between border-b border-slate-100 pb-2"><span class="flex items-center gap-2.5"><span class="w-3 h-3 rounded-full bg-orange-300"></span>Cruise</span><div class="flex gap-6"><b>22</b><span class="text-slate-400 w-8 text-right">18%</span></div></div>
+                <div class="flex items-center justify-between border-b border-slate-100 pb-2"><span class="flex items-center gap-2.5"><span class="w-3 h-3 rounded-full bg-sky-400"></span>Agency</span><div class="flex gap-6"><b>17</b><span class="text-slate-400 w-8 text-right">14%</span></div></div>
+                <div class="flex items-center justify-between"><span class="flex items-center gap-2.5"><span class="w-3 h-3 rounded-full bg-purple-500"></span>Corporate</span><div class="flex gap-6"><b>13</b><span class="text-slate-400 w-8 text-right">10%</span></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5 bg-white rounded-2xl p-5 custom-shadow border border-slate-100">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="font-bold text-slate-800 text-base">Top Performing Partners</h3>
+              <a href="#" class="text-xs font-bold text-brand-600">Lihat Semua →</a>
+            </div>
+            <div class="space-y-3 text-xs">
+              <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-50/70">
+                <div class="flex items-center gap-3">
+                  <span class="w-6 h-6 rounded-full bg-orange-100 text-brand-600 font-bold flex items-center justify-center">1</span>
+                  <div class="w-8 h-8 rounded-lg bg-red-50 text-red-600 font-extrabold flex items-center justify-center">M</div>
+                  <div><div class="font-bold text-slate-900">Marriott International</div><div class="text-[11px] text-slate-400">Hotel • Global</div></div>
+                </div>
+                <div class="flex items-center gap-4"><div><b class="text-slate-900">68</b><div class="text-[10px] text-slate-400">Placements</div></div><span class="text-emerald-600 font-bold">↑ 22%</span></div>
+              </div>
+              <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-50/70">
+                <div class="flex items-center gap-3">
+                  <span class="w-6 h-6 rounded-full bg-orange-100 text-brand-600 font-bold flex items-center justify-center">2</span>
+                  <div class="w-8 h-8 rounded-lg bg-blue-600 text-white font-extrabold flex items-center justify-center">RC</div>
+                  <div><div class="font-bold text-slate-900">Royal Caribbean</div><div class="text-[11px] text-slate-400">Cruise • International</div></div>
+                </div>
+                <div class="flex items-center gap-4"><div><b class="text-slate-900">54</b><div class="text-[10px] text-slate-400">Placements</div></div><span class="text-emerald-600 font-bold">↑ 18%</span></div>
+              </div>
+              <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-50/70">
+                <div class="flex items-center gap-3">
+                  <span class="w-6 h-6 rounded-full bg-orange-100 text-brand-600 font-bold flex items-center justify-center">3</span>
+                  <div class="w-8 h-8 rounded-lg bg-sky-100 text-sky-700 font-extrabold flex items-center justify-center">H</div>
+                  <div><div class="font-bold text-slate-900">Hilton Hotels & Resorts</div><div class="text-[11px] text-slate-400">Hotel • International</div></div>
+                </div>
+                <div class="flex items-center gap-4"><div><b class="text-slate-900">42</b><div class="text-[10px] text-slate-400">Placements</div></div><span class="text-emerald-600 font-bold">↑ 17%</span></div>
+              </div>
+              <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-50/70">
+                <div class="flex items-center gap-3">
+                  <span class="w-6 h-6 rounded-full bg-orange-100 text-brand-600 font-bold flex items-center justify-center">4</span>
+                  <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 font-extrabold flex items-center justify-center">A</div>
+                  <div><div class="font-bold text-slate-900">Accor Group</div><div class="text-[11px] text-slate-400">Hotel • International</div></div>
+                </div>
+                <div class="flex items-center gap-4"><div><b class="text-slate-900">36</b><div class="text-[10px] text-slate-400">Placements</div></div><span class="text-emerald-600 font-bold">↑ 13%</span></div>
+              </div>
+              <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-50/70">
+                <div class="flex items-center gap-3">
+                  <span class="w-6 h-6 rounded-full bg-orange-100 text-brand-600 font-bold flex items-center justify-center">5</span>
+                  <div class="w-8 h-8 rounded-lg bg-cyan-100 text-cyan-700 font-extrabold flex items-center justify-center">AY</div>
+                  <div><div class="font-bold text-slate-900">AYANA Hospitality</div><div class="text-[11px] text-slate-400">Hotel • Indonesia</div></div>
+                </div>
+                <div class="flex items-center gap-4"><div><b class="text-slate-900">28</b><div class="text-[10px] text-slate-400">Placements</div></div><span class="text-emerald-600 font-bold">↑ 12%</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ROW 3: DAFTAR INDUSTRY PARTNERS & AKTIVITAS MOU -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-8 bg-white rounded-2xl p-5 custom-shadow border border-slate-100">
+            <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+              <h3 class="font-bold text-slate-800 text-base">Daftar Industry Partners</h3>
+              <div class="flex flex-wrap items-center gap-2 text-xs">
+                <input type="text" placeholder="Cari nama partner, kategori, kota..." class="px-3 py-2 border border-slate-200 rounded-xl bg-slate-50 w-52" />
+                <button class="px-3 py-2 border border-slate-200 rounded-xl bg-slate-50 font-semibold">Filter</button>
+                <button class="px-3.5 py-2 bg-brand-500 text-white font-bold rounded-xl">+ Tambah Partner</button>
+              </div>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs">
+                <thead>
+                  <tr class="bg-[#F5F1E8] text-slate-600 font-bold">
+                    <th class="py-2.5 px-2.5 rounded-l-lg">No</th><th class="py-2.5 px-2.5">Partner Name</th><th class="py-2.5 px-2.5">Category</th><th class="py-2.5 px-2.5">Country/City</th><th class="py-2.5 px-2.5">PIC</th><th class="py-2.5 px-2.5 text-center">Open Positions</th><th class="py-2.5 px-2.5 text-center">Candidates Sent</th><th class="py-2.5 px-2.5 text-center">Successful Placements</th><th class="py-2.5 px-2.5 text-center">Contract Status</th><th class="py-2.5 px-2.5 rounded-r-lg text-center">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 font-medium">
+                  <tr><td class="py-3 px-2.5">1</td><td class="py-3 px-2.5 font-bold">Marriott International</td><td class="py-3 px-2.5">Hotel</td><td class="py-3 px-2.5">USA</td><td class="py-3 px-2.5">John Miller</td><td class="py-3 px-2.5 text-center">28</td><td class="py-3 px-2.5 text-center">64</td><td class="py-3 px-2.5 text-center">18</td><td class="py-3 px-2.5 text-center"><span class="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-600 font-bold">Active</span></td><td class="py-3 px-2.5 text-center">•••</td></tr>
+                  <tr><td class="py-3 px-2.5">2</td><td class="py-3 px-2.5 font-bold">Royal Caribbean</td><td class="py-3 px-2.5">Cruise</td><td class="py-3 px-2.5">USA</td><td class="py-3 px-2.5">Sarah Chen</td><td class="py-3 px-2.5 text-center">35</td><td class="py-3 px-2.5 text-center">52</td><td class="py-3 px-2.5 text-center">14</td><td class="py-3 px-2.5 text-center"><span class="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-600 font-bold">Active</span></td><td class="py-3 px-2.5 text-center">•••</td></tr>
+                  <tr><td class="py-3 px-2.5">3</td><td class="py-3 px-2.5 font-bold">Hilton Hotels & Resorts</td><td class="py-3 px-2.5">Hotel</td><td class="py-3 px-2.5">USA</td><td class="py-3 px-2.5">Michael Tan</td><td class="py-3 px-2.5 text-center">12</td><td class="py-3 px-2.5 text-center">38</td><td class="py-3 px-2.5 text-center">11</td><td class="py-3 px-2.5 text-center"><span class="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-600 font-bold">Active</span></td><td class="py-3 px-2.5 text-center">•••</td></tr>
+                  <tr><td class="py-3 px-2.5">4</td><td class="py-3 px-2.5 font-bold">Accor Group</td><td class="py-3 px-2.5">Hotel</td><td class="py-3 px-2.5">France</td><td class="py-3 px-2.5">Pierre Dubois</td><td class="py-3 px-2.5 text-center">18</td><td class="py-3 px-2.5 text-center">40</td><td class="py-3 px-2.5 text-center">9</td><td class="py-3 px-2.5 text-center"><span class="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-600 font-bold">Active</span></td><td class="py-3 px-2.5 text-center">•••</td></tr>
+                  <tr><td class="py-3 px-2.5">5</td><td class="py-3 px-2.5 font-bold">AYANA Hospitality</td><td class="py-3 px-2.5">Hotel</td><td class="py-3 px-2.5">Indonesia (Bali)</td><td class="py-3 px-2.5">Putu Aria</td><td class="py-3 px-2.5 text-center">14</td><td class="py-3 px-2.5 text-center">36</td><td class="py-3 px-2.5 text-center">12</td><td class="py-3 px-2.5 text-center"><span class="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-600 font-bold">Active</span></td><td class="py-3 px-2.5 text-center">•••</td></tr>
+                  <tr><td class="py-3 px-2.5">6</td><td class="py-3 px-2.5 font-bold">Jumeirah Group</td><td class="py-3 px-2.5">Hotel</td><td class="py-3 px-2.5">UAE (Dubai)</td><td class="py-3 px-2.5">Ahmed Al Farsi</td><td class="py-3 px-2.5 text-center">22</td><td class="py-3 px-2.5 text-center">28</td><td class="py-3 px-2.5 text-center">8</td><td class="py-3 px-2.5 text-center"><span class="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-600 font-bold">Active</span></td><td class="py-3 px-2.5 text-center">•••</td></tr>
+                  <tr><td class="py-3 px-2.5">7</td><td class="py-3 px-2.5 font-bold">Four Seasons</td><td class="py-3 px-2.5">Hotel</td><td class="py-3 px-2.5">Japan (Tokyo)</td><td class="py-3 px-2.5">Yuki Tanaka</td><td class="py-3 px-2.5 text-center">16</td><td class="py-3 px-2.5 text-center">24</td><td class="py-3 px-2.5 text-center">6</td><td class="py-3 px-2.5 text-center"><span class="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-600 font-bold">Active</span></td><td class="py-3 px-2.5 text-center">•••</td></tr>
+                  <tr><td class="py-3 px-2.5">8</td><td class="py-3 px-2.5 font-bold">Singapore Airlines</td><td class="py-3 px-2.5">Airline/Agency</td><td class="py-3 px-2.5">Singapore</td><td class="py-3 px-2.5">Lim Wei Han</td><td class="py-3 px-2.5 text-center">10</td><td class="py-3 px-2.5 text-center">20</td><td class="py-3 px-2.5 text-center">7</td><td class="py-3 px-2.5 text-center"><span class="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-600 font-bold">Active</span></td><td class="py-3 px-2.5 text-center">•••</td></tr>
+                  <tr><td class="py-3 px-2.5">9</td><td class="py-3 px-2.5 font-bold">Pret A Manger</td><td class="py-3 px-2.5">Restaurant</td><td class="py-3 px-2.5">UK (London)</td><td class="py-3 px-2.5">Emma Wilson</td><td class="py-3 px-2.5 text-center">8</td><td class="py-3 px-2.5 text-center">18</td><td class="py-3 px-2.5 text-center">5</td><td class="py-3 px-2.5 text-center"><span class="px-2.5 py-0.5 rounded-full bg-orange-50 text-brand-600 font-bold">Pending</span></td><td class="py-3 px-2.5 text-center">•••</td></tr>
+                  <tr><td class="py-3 px-2.5">10</td><td class="py-3 px-2.5 font-bold">Hyatt Hotels</td><td class="py-3 px-2.5">Hotel</td><td class="py-3 px-2.5">Indonesia (Jakarta)</td><td class="py-3 px-2.5">Daniel Pratama</td><td class="py-3 px-2.5 text-center">15</td><td class="py-3 px-2.5 text-center">30</td><td class="py-3 px-2.5 text-center">10</td><td class="py-3 px-2.5 text-center"><span class="px-2.5 py-0.5 rounded-full bg-red-50 text-red-500 font-bold">Renewal Due</span></td><td class="py-3 px-2.5 text-center">•••</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="lg:col-span-4 bg-white rounded-2xl p-5 custom-shadow border border-slate-100">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="font-bold text-slate-800 text-base">Aktivitas MoU / Kontrak Terbaru</h3>
+              <a href="#" class="text-xs font-bold text-brand-600">Lihat Semua →</a>
+            </div>
+            <div class="space-y-4 text-xs">
+              <div class="flex justify-between gap-2"><div><b>Penandatanganan MoU</b><div class="text-slate-500">Marriott International<br>Program Internship & Placement</div></div><span class="text-slate-400 text-right shrink-0">21 Apr 2025<br>10:24</span></div>
+              <div class="flex justify-between gap-2"><div><b>Perpanjangan Kontrak</b><div class="text-slate-500">Hilton Hotels & Resorts<br>+2 tahun (2025 - 2027)</div></div><span class="text-slate-400 text-right shrink-0">18 Apr 2025<br>14:10</span></div>
+              <div class="flex justify-between gap-2"><div><b>Kerja Sama Baru</b><div class="text-slate-500">Singapore Airlines<br>Program Cabin Crew Training</div></div><span class="text-slate-400 text-right shrink-0">15 Apr 2025<br>09:12</span></div>
+              <div class="flex justify-between gap-2"><div><b>Pembaruan Kontrak</b><div class="text-slate-500">AYANA Hospitality<br>Penyesuaian kuota penempatan</div></div><span class="text-slate-400 text-right shrink-0">12 Apr 2025<br>16:45</span></div>
+              <div class="flex justify-between gap-2"><div><b>Penandatanganan MoU</b><div class="text-slate-500">Accor Group<br>Program Management Trainee</div></div><span class="text-slate-400 text-right shrink-0">10 Apr 2025<br>11:20</span></div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script>
+    lucide.createIcons();
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('-translate-x-full');
+      document.getElementById('sidebarOverlay').classList.toggle('hidden');
+    }
+  </script>
+</body>
+</html>

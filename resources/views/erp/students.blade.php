@@ -1,583 +1,450 @@
 <!DOCTYPE html>
-<html lang="id"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>IDEA ERP - Student Management</title>
-<!-- Tailwind CSS v3 CDN with forms and container queries -->
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<!-- Font Awesome Icons -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
-<script>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IDEA ERP - Student Management</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
     tailwind.config = {
       theme: {
         extend: {
+          fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
           colors: {
-            brand: {
-              50: '#fff7ed',
-              100: '#ffedd5',
-              500: '#f97316',
-              600: '#ea580c',
-              700: '#c2410c'
-            }
+            brand: { 50: '#FFF7ED', 100: '#FFEDD5', 500: '#F97316', 600: '#EA580C' }
           }
         }
       }
     }
   </script>
-<style data-purpose="custom-styling">
-    ::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #f1f5f9;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #cbd5e1;
-      border-radius: 9999px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #94a3b8;
-    }
-    .donut-chart {
-      background: conic-gradient(
-        #f97316 0% 35%,
-        #fb923c 35% 60%,
-        #fdba74 60% 75%,
-        #b45309 75% 89%,
-        #d97706 89% 100%
-      );
-    }
+  <style>
+    body { background-color: #FAF6F0; color: #1E293B; }
+    .custom-shadow { box-shadow: 0 2px 10px -2px rgba(0, 0, 0, 0.04), 0 1px 3px -1px rgba(0, 0, 0, 0.02); }
   </style>
 </head>
-<body class="bg-[#f8f9fa] text-slate-800 antialiased font-sans flex min-h-screen">
-<!-- BEGIN: Sidebar -->
-<aside class="w-64 bg-white border-r border-slate-200 flex flex-col justify-between flex-shrink-0 min-h-screen sticky top-0 h-screen overflow-y-auto">
-<div>
-<!-- Brand Logo Header -->
-<div class="p-6 flex items-center justify-between border-b border-slate-100">
-<a href="{{ route('erp.dashboard') }}" class="flex items-center space-x-3">
-<div class="w-9 h-9 rounded-full bg-gradient-to-tr from-brand-600 to-amber-400 flex items-center justify-center text-white shadow-sm ring-4 ring-orange-50">
-<div class="w-4 h-4 rounded-full border-2 border-white"></div>
-</div>
-<div>
-<h1 class="font-extrabold text-lg tracking-tight text-slate-900 leading-tight">IDEA ERP</h1>
-<p class="text-[10px] text-slate-400 font-medium tracking-wide">Education for a Brighter Tomorrow</p>
-</div>
-</a>
-<button class="text-slate-400 hover:text-slate-600 transition-colors">
-<i class="fa-solid fa-chevron-left text-xs"></i>
-</button>
-</div>
-<!-- Navigation Links -->
-<nav class="p-4 space-y-1 text-sm font-medium">
-<a class="flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors" href="{{ route('erp.dashboard') }}">
-<i class="fa-solid fa-shapes w-5 text-slate-400"></i>
-<span>Dashboard</span>
-</a>
-<a class="flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors" href="{{ route('erp.admission') }}">
-<i class="fa-solid fa-user-plus w-5 text-slate-400"></i>
-<span>Admission</span>
-</a>
-<a class="flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors" href="{{ route('erp.finance') }}">
-<i class="fa-solid fa-wallet w-5 text-slate-400"></i>
-<span>Finance</span>
-</a>
-<!-- Active Page Link: Student Management -->
-<a class="flex items-center space-x-3 px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-brand-500 to-brand-600 text-white shadow-sm shadow-orange-200" href="{{ route('erp.students') }}">
-<i class="fa-solid fa-user-group w-5 text-white"></i>
-<span class="font-semibold">Student Management</span>
-</a>
-<a class="flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors" href="{{ route('erp.assessments') }}">
-<i class="fa-solid fa-certificate w-5 text-slate-400"></i>
-<span>Assessment &amp; Certification</span>
-</a>
-<a class="flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors" href="{{ route('erp.placements') }}">
-<i class="fa-solid fa-briefcase w-5 text-slate-400"></i>
-<span>Career &amp; Placement</span>
-</a>
-<a class="flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors" href="{{ route('erp.partners') }}">
-<i class="fa-solid fa-handshake w-5 text-slate-400"></i>
-<span>Partners</span>
-</a>
-<a class="flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors" href="{{ route('erp.alumni') }}">
-<i class="fa-solid fa-graduation-cap w-5 text-slate-400"></i>
-<span>Alumni</span>
-</a>
-<a class="flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors" href="{{ route('erp.reports') }}">
-<i class="fa-solid fa-chart-column w-5 text-slate-400"></i>
-<span>Reports</span>
-</a>
-</nav>
-</div>
-<!-- Promo Banner Card in Sidebar -->
-<div class="p-4">
-<div class="rounded-2xl p-4 relative overflow-hidden bg-gradient-to-b from-orange-50 to-orange-100/70 border border-orange-200/60 shadow-sm">
-<div class="w-12 h-12 rounded-xl bg-orange-200 flex items-center justify-center text-brand-600 mb-3 text-xl">
-<i class="fa-solid fa-lightbulb"></i>
-</div>
-<h4 class="font-bold text-slate-900 leading-snug text-sm">Membangun Talenta Global dari Indonesia</h4>
-<p class="text-[11px] text-slate-600 mt-1">Pendidikan, peluang dan masa depan yang lebih baik.</p>
-<a href="{{ route('erp.reports') }}" class="mt-3.5 w-full py-2 px-3 bg-brand-500 hover:bg-brand-600 text-white font-medium text-xs rounded-xl shadow transition-colors flex items-center justify-center space-x-2">
-<span>Bersama IDEA ERP</span>
-<i class="fa-solid fa-arrow-right text-[10px]"></i>
-</a>
-</div>
-</div>
-</aside>
-<!-- END: Sidebar -->
-<!-- BEGIN: MainContentWrapper -->
-<div class="flex-1 flex flex-col min-w-0">
-<!-- BEGIN: TopBar -->
-<header class="bg-white border-b border-slate-200 h-16 flex items-center justify-between px-8 sticky top-0 z-20">
-<!-- Search Input -->
-<form action="{{ route('erp.students') }}" method="GET" class="relative w-96">
-<span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
-<i class="fa-solid fa-magnifying-glass text-xs"></i>
-</span>
-<input name="q" value="{{ $filters['q'] ?? '' }}" class="w-full pl-9 pr-4 py-1.5 text-xs bg-slate-50 border border-slate-200 rounded-lg text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500" placeholder="Cari data siswa, program, pembayaran, atau lainnya..." type="text"/>
-</form>
-<!-- Top Right Actions & Profile -->
-<div class="flex items-center space-x-5">
-<button class="relative text-slate-400 hover:text-slate-600 p-1">
-<i class="fa-regular fa-bell text-lg"></i>
-<span class="absolute top-0 right-0 w-2 h-2 bg-brand-500 rounded-full ring-2 ring-white"></span>
-</button>
-<div class="h-6 w-px bg-slate-200"></div>
-<!-- User Profile Pill -->
-<div class="flex items-center space-x-3 cursor-pointer">
-<div class="w-9 h-9 rounded-full bg-slate-200 overflow-hidden ring-2 ring-orange-100 flex items-center justify-center font-bold text-slate-500">
-            SA
-          </div>
-<div class="text-left hidden md:block">
-<h5 class="text-xs font-bold text-slate-800 leading-none">{{ $currentUser->full_name ?? 'Sari Anggraini' }}</h5>
-<span class="text-[10px] text-slate-400">{{ $currentUser->position_name ?? 'Head of Administration' }}</span>
-</div>
-<i class="fa-solid fa-chevron-down text-[10px] text-slate-400"></i>
-</div>
-</div>
-</header>
-<!-- END: TopBar -->
-<!-- BEGIN: MainBody -->
-<main class="p-8 space-y-6">
-@if(session('success'))
-<div class="bg-emerald-50 border border-emerald-200 text-emerald-800 px-4 py-3 rounded-xl text-xs font-semibold flex items-center justify-between shadow-sm">
-  <span>{{ session('success') }}</span>
-  <button onclick="this.parentElement.remove()" class="text-emerald-600 hover:text-emerald-900">✕</button>
-</div>
-@endif
-<!-- Header Title & Greeting Section -->
-<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-<div>
-<h2 class="text-2xl font-black text-slate-900 tracking-tight">Student Management</h2>
-<p class="text-xs text-slate-500 mt-1">Kelola data siswa, pantau perkembangan, dan dukung perjalanan mereka bersama IDEA ERP.</p>
-</div>
-<div class="text-right">
-<p class="text-xs font-bold text-slate-700">Senin, 21 Apr 2025</p>
-<p class="text-[11px] text-slate-400">Semangat untuk hari yang produktif!</p>
-</div>
-</div>
-<!-- BEGIN: KPICardsGrid -->
-<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-<!-- KPI 1: Active Students -->
-<div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
-<div class="w-10 h-10 rounded-xl bg-orange-50 text-brand-500 flex items-center justify-center mb-2">
-<i class="fa-solid fa-users text-base"></i>
-</div>
-<div>
-<p class="text-[11px] font-medium text-slate-400">Active Students</p>
-<h3 class="text-2xl font-bold text-slate-900 mt-0.5">{{ $kpis['active_students'] }}</h3>
-<p class="text-[10px] text-emerald-600 font-semibold mt-1">
-<i class="fa-solid fa-arrow-up mr-0.5"></i>5% <span class="text-slate-400 font-normal">dari bulan lalu</span>
-</p>
-</div>
-</div>
-<!-- KPI 2: New Enrollment -->
-<div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
-<div class="w-10 h-10 rounded-xl bg-orange-50 text-brand-500 flex items-center justify-center mb-2">
-<i class="fa-solid fa-graduation-cap text-base"></i>
-</div>
-<div>
-<p class="text-[11px] font-medium text-slate-400">Total Enrollment</p>
-<h3 class="text-2xl font-bold text-slate-900 mt-0.5">{{ $kpis['new_enrollment'] }}</h3>
-<p class="text-[10px] text-emerald-600 font-semibold mt-1">
-<i class="fa-solid fa-arrow-up mr-0.5"></i>18% <span class="text-slate-400 font-normal">dari bulan lalu</span>
-</p>
-</div>
-</div>
-<!-- KPI 3: Attendance Rate -->
-<div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
-<div class="w-10 h-10 rounded-xl bg-orange-50 text-brand-500 flex items-center justify-center mb-2">
-<i class="fa-solid fa-chart-simple text-base"></i>
-</div>
-<div>
-<p class="text-[11px] font-medium text-slate-400">Attendance Rate</p>
-<h3 class="text-2xl font-bold text-slate-900 mt-0.5">{{ $kpis['attendance_rate'] }}%</h3>
-<p class="text-[10px] text-emerald-600 font-semibold mt-1">
-<i class="fa-solid fa-arrow-up mr-0.5"></i>3% <span class="text-slate-400 font-normal">dari bulan lalu</span>
-</p>
-</div>
-</div>
-<!-- KPI 4: Training Progress -->
-<div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
-<div class="w-10 h-10 rounded-xl bg-orange-50 text-brand-500 flex items-center justify-center mb-2">
-<i class="fa-solid fa-book-open text-base"></i>
-</div>
-<div>
-<p class="text-[11px] font-medium text-slate-400">Training Progress</p>
-<h3 class="text-2xl font-bold text-slate-900 mt-0.5">{{ $kpis['training_progress'] }}%</h3>
-<p class="text-[10px] text-emerald-600 font-semibold mt-1">
-<i class="fa-solid fa-arrow-up mr-0.5"></i>8% <span class="text-slate-400 font-normal">dari bulan lalu</span>
-</p>
-</div>
-</div>
-<!-- KPI 5: Students in Dormitory -->
-<div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
-<div class="w-10 h-10 rounded-xl bg-orange-50 text-brand-500 flex items-center justify-center mb-2">
-<i class="fa-solid fa-house-chimney text-base"></i>
-</div>
-<div>
-<p class="text-[11px] font-medium text-slate-400">Students in Dormitory</p>
-<h3 class="text-2xl font-bold text-slate-900 mt-0.5">{{ $kpis['dormitory_students'] }}</h3>
-<p class="text-[10px] text-emerald-600 font-semibold mt-1">
-<i class="fa-solid fa-arrow-up mr-0.5"></i>6% <span class="text-slate-400 font-normal">dari bulan lalu</span>
-</p>
-</div>
-</div>
-<!-- KPI 6: Graduation Ready -->
-<div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
-<div class="w-10 h-10 rounded-xl bg-orange-50 text-brand-500 flex items-center justify-center mb-2">
-<i class="fa-solid fa-award text-base"></i>
-</div>
-<div>
-<p class="text-[11px] font-medium text-slate-400">Graduation Ready</p>
-<h3 class="text-2xl font-bold text-slate-900 mt-0.5">{{ $kpis['graduation_ready'] }}</h3>
-<p class="text-[10px] text-emerald-600 font-semibold mt-1">
-<i class="fa-solid fa-arrow-up mr-0.5"></i>25% <span class="text-slate-400 font-normal">dari bulan lalu</span>
-</p>
-</div>
-</div>
-</div>
-<!-- END: KPICardsGrid -->
-<!-- BEGIN: FiltersBar -->
-<form action="{{ route('erp.students') }}" method="GET" class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-wrap items-center justify-between gap-4">
-<div class="flex flex-wrap items-center gap-3">
-<span class="text-xs font-bold text-slate-700 mr-1">Filter:</span>
-<!-- Dropdown 1: Cabang -->
-<div class="relative">
-<select name="branch_id" onchange="this.form.submit()" class="pl-8 pr-7 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 focus:ring-brand-500 focus:border-brand-500 appearance-none">
-<option value="">Semua Cabang</option>
-@foreach($branches as $b)
-<option value="{{ $b->id }}" @selected(($filters['branch_id'] ?? '') == $b->id)>{{ $b->name }}</option>
-@endforeach
-</select>
-<i class="fa-solid fa-location-dot absolute left-3 top-3 text-[11px] text-slate-400 pointer-events-none"></i>
-<i class="fa-solid fa-chevron-down absolute right-2.5 top-3 text-[10px] text-slate-400 pointer-events-none"></i>
-</div>
-<!-- Dropdown 2: Batch -->
-<div class="relative">
-<select name="batch_id" onchange="this.form.submit()" class="pl-8 pr-7 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 focus:ring-brand-500 focus:border-brand-500 appearance-none">
-<option value="">Semua Batch</option>
-@foreach($batches as $bt)
-<option value="{{ $bt->id }}" @selected(($filters['batch_id'] ?? '') == $bt->id)>{{ $bt->name }}</option>
-@endforeach
-</select>
-<i class="fa-regular fa-calendar absolute left-3 top-3 text-[11px] text-slate-400 pointer-events-none"></i>
-<i class="fa-solid fa-chevron-down absolute right-2.5 top-3 text-[10px] text-slate-400 pointer-events-none"></i>
-</div>
-<!-- Dropdown 3: Program -->
-<div class="relative">
-<select name="program_id" onchange="this.form.submit()" class="pl-8 pr-7 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 focus:ring-brand-500 focus:border-brand-500 appearance-none">
-<option value="">Semua Program</option>
-@foreach($programs as $pr)
-<option value="{{ $pr->id }}" @selected(($filters['program_id'] ?? '') == $pr->id)>{{ $pr->name }}</option>
-@endforeach
-</select>
-<i class="fa-solid fa-graduation-cap absolute left-3 top-3 text-[11px] text-slate-400 pointer-events-none"></i>
-<i class="fa-solid fa-chevron-down absolute right-2.5 top-3 text-[10px] text-slate-400 pointer-events-none"></i>
-</div>
-<a href="{{ route('erp.students') }}" class="text-xs font-semibold text-brand-600 hover:text-brand-700 ml-2">Reset Filter</a>
-</div>
-<!-- Search Input Filter -->
-<div class="relative w-72">
-<i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-xs text-slate-400"></i>
-<input name="q" value="{{ $filters['q'] ?? '' }}" class="w-full pl-9 pr-3 py-1.5 text-xs bg-slate-50 border border-slate-200 rounded-xl placeholder-slate-400 focus:ring-brand-500 focus:border-brand-500" placeholder="Cari nama siswa, ID, atau program..." type="text"/>
-</div>
-</form>
-<!-- END: FiltersBar -->
-<!-- BEGIN: MidSectionGrid -->
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-<!-- Column 1: Weekly Class Schedule (5 Cols) -->
-<div class="lg:col-span-5 bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
-<div>
-<div class="flex items-center justify-between mb-4">
-<h3 class="font-bold text-slate-800 text-sm">Jadwal Kelas Minggu Ini ({{ count($schedules) }} Sesi)</h3>
-<span class="text-xs font-semibold text-brand-600">Live PostgreSQL</span>
-</div>
-<div class="space-y-2.5">
-@foreach($schedules as $sch)
-<div class="flex items-center justify-between p-3 rounded-xl border border-slate-100 bg-slate-50/60 hover:bg-orange-50/40 transition">
-  <div class="flex items-center gap-3">
-    <div class="px-2.5 py-1.5 rounded-lg bg-orange-100 text-brand-700 text-center min-w-[56px]">
-      <div class="text-xs font-extrabold">{{ substr($sch->start_time, 0, 5) }}</div>
-      <div class="text-[9px] font-semibold uppercase">{{ date('d M', strtotime($sch->schedule_date)) }}</div>
-    </div>
-    <div>
-      <div class="text-xs font-bold text-slate-800">{{ $sch->subject_name }}</div>
-      <div class="text-[10px] text-slate-500">{{ $sch->class_name }} • {{ $sch->room_name }}</div>
-    </div>
-  </div>
-  <span class="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">{{ $sch->delivery_mode }}</span>
-</div>
-@endforeach
-</div>
-</div>
-</div>
-<!-- Column 2: Program Stats & Donut Chart (4 Cols) -->
-<div class="lg:col-span-4 space-y-6 flex flex-col justify-between">
-<!-- Bar Chart Card: Training Progress per Program -->
-<div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex-1">
-<div class="flex items-center justify-between mb-4">
-<h3 class="font-bold text-slate-800 text-xs">Training Progress per Program</h3>
-<div class="flex items-center space-x-1 text-[11px] text-slate-500 font-medium">
-<span>Tahun Ini</span>
-<i class="fa-solid fa-chevron-down text-[9px] text-slate-400"></i>
-</div>
-</div>
-<!-- CSS Bar Chart -->
 @php
-  $progBarColors = ['bg-brand-500', 'bg-orange-400', 'bg-amber-400', 'bg-amber-600', 'bg-amber-300'];
+  $avatars = [
+    'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=80&q=80',
+    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=80&q=80',
+    'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=80&q=80',
+    'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=80&q=80',
+    'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=80&q=80',
+  ];
 @endphp
-<div class="h-32 flex items-end justify-between gap-3 pt-4 px-2 border-b border-slate-100">
-@foreach($programStats as $idx => $ps)
-<div class="flex-1 flex flex-col items-center gap-1.5 h-full justify-end">
-<span class="text-[10px] font-bold text-slate-700">{{ $ps->avg_progress }}%</span>
-<div class="w-full {{ $progBarColors[$idx % count($progBarColors)] }} rounded-t-md" style="height: {{ max(20, $ps->avg_progress) }}%;"></div>
-<span class="text-[9px] font-medium text-slate-500 truncate w-full text-center">{{ explode(' ', $ps->name)[0] }}</span>
-</div>
-@endforeach
-</div>
-</div>
-<!-- Donut Chart Card: Distribusi Siswa per Program -->
-<div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex-1">
-<h3 class="font-bold text-slate-800 text-xs mb-3">Distribusi Siswa per Program</h3>
-<div class="flex items-center justify-between gap-4">
-<div class="relative w-28 h-28 flex-shrink-0">
-<div class="w-full h-full rounded-full donut-chart flex items-center justify-center shadow-inner">
-<div class="w-16 h-16 bg-white rounded-full flex flex-col items-center justify-center text-center shadow">
-<span class="text-[9px] text-slate-400 font-medium">Total</span>
-<span class="text-xs font-extrabold text-slate-800">{{ $kpis['new_enrollment'] }}</span>
-<span class="text-[8px] text-slate-400">Siswa</span>
-</div>
-</div>
-</div>
-<div class="flex-1 space-y-1.5 text-[11px]">
-@php
-  $dotColors = ['bg-brand-500', 'bg-orange-400', 'bg-amber-400', 'bg-amber-700', 'bg-amber-500'];
-  $totStd = max(1, $programStats->sum('student_count'));
-@endphp
-@foreach($programStats as $idx => $ps)
-<div class="flex items-center justify-between">
-<div class="flex items-center space-x-2">
-<span class="w-2.5 h-2.5 rounded-full {{ $dotColors[$idx % count($dotColors)] }}"></span>
-<span class="text-slate-600 truncate max-w-[95px]">{{ explode(' ', $ps->name)[0] }}</span>
-</div>
-<span class="font-bold text-slate-800">{{ round(($ps->student_count / $totStd) * 100) }}% <span class="text-[10px] font-normal text-slate-400">({{ $ps->student_count }})</span></span>
-</div>
-@endforeach
-</div>
-</div>
-</div>
-</div>
-<!-- Column 3: Recent Activity & Notifications (3 Cols) -->
-<div class="lg:col-span-3 bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
-<div>
-<div class="flex items-center justify-between mb-4">
-<h3 class="font-bold text-slate-800 text-xs">Aktivitas &amp; Notifikasi Terbaru</h3>
-<a class="text-xs font-semibold text-brand-600 hover:text-brand-700 flex items-center space-x-1" href="{{ route('erp.assessments') }}">
-<span>Lihat Semua</span>
-<i class="fa-solid fa-arrow-right text-[10px]"></i>
-</a>
-</div>
-<div class="space-y-4">
-@foreach($students->take(5) as $st)
-<div class="flex items-start space-x-3">
-<div class="w-8 h-8 rounded-full bg-orange-100 text-brand-600 flex items-center justify-center flex-shrink-0 text-xs mt-0.5">
-<i class="fa-solid fa-user-check"></i>
-</div>
-<div class="flex-1 min-w-0">
-<div class="flex items-center justify-between">
-<h5 class="text-xs font-bold text-slate-800 truncate">{{ $st->full_name }}</h5>
-<span class="text-[10px] text-slate-400">{{ $st->student_no }}</span>
-</div>
-<p class="text-[11px] text-slate-500 leading-tight mt-0.5">{{ $st->program_name }} • Progress {{ round($st->progress_score) }}%</p>
-</div>
-</div>
-@endforeach
-</div>
-</div>
-</div>
-</div>
-<!-- END: MidSectionGrid -->
-<!-- BEGIN: StudentTableSection -->
-<div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-<!-- Table Action Header -->
-<div class="p-5 flex items-center justify-between border-b border-slate-100">
-<div>
-<h3 class="font-bold text-slate-800 text-base">Daftar Siswa ({{ count($students) }} Data)</h3>
-</div>
-<div class="flex items-center space-x-3">
-<a href="{{ route('erp.reports.export', ['type' => 'students']) }}" class="px-4 py-2 bg-slate-50 hover:bg-slate-100 text-slate-700 text-xs font-semibold rounded-xl border border-slate-200 transition-colors flex items-center space-x-2">
-<i class="fa-solid fa-arrow-down text-slate-500"></i>
-<span>Export CSV</span>
-</a>
-<button onclick="document.getElementById('modalAddStudent').classList.remove('hidden')" class="px-4 py-2 bg-brand-500 hover:bg-brand-600 text-white text-xs font-semibold rounded-xl shadow-sm transition-colors flex items-center space-x-2">
-<i class="fa-solid fa-plus text-xs"></i>
-<span>Tambah Siswa</span>
-</button>
-</div>
-</div>
-<!-- Table Responsive Container -->
-<div class="overflow-x-auto">
-<table class="w-full text-left text-xs">
-<thead class="bg-slate-50/80 text-slate-400 text-[11px] uppercase tracking-wider font-semibold border-b border-slate-100">
-<tr>
-<th class="py-3 px-4 w-10 text-center">
-<input class="rounded border-slate-300 text-brand-600 focus:ring-brand-500" type="checkbox"/>
-</th>
-<th class="py-3 px-4 font-semibold">Student ID</th>
-<th class="py-3 px-4 font-semibold">Nama</th>
-<th class="py-3 px-4 font-semibold">Program</th>
-<th class="py-3 px-4 font-semibold">Batch</th>
-<th class="py-3 px-4 font-semibold">Attendance</th>
-<th class="py-3 px-4 font-semibold w-48">Training Progress</th>
-<th class="py-3 px-4 font-semibold text-center">Status</th>
-<th class="py-3 px-4 font-semibold text-center">Cabang</th>
-</tr>
-</thead>
-<tbody class="divide-y divide-slate-100 font-medium text-slate-700">
-@foreach($students as $st)
-@php
-  $att = (int) round($st->attendance_score);
-  $prog = (int) round($st->progress_score);
-@endphp
-<tr class="hover:bg-slate-50/70 transition-colors">
-<td class="py-3.5 px-4 text-center">
-<input class="rounded border-slate-300 text-brand-600 focus:ring-brand-500" type="checkbox"/>
-</td>
-<td class="py-3.5 px-4 font-mono font-medium text-slate-600">{{ $st->student_no }}</td>
-<td class="py-3.5 px-4">
-<div class="flex items-center space-x-2.5">
-<div class="w-8 h-8 rounded-full bg-orange-100 text-brand-700 font-bold flex items-center justify-center text-xs ring-1 ring-orange-200">
-  {{ strtoupper(substr($st->full_name, 0, 2)) }}
-</div>
-<span class="font-semibold text-slate-900">{{ $st->full_name }}</span>
-</div>
-</td>
-<td class="py-3.5 px-4 text-slate-600">{{ $st->program_name }}</td>
-<td class="py-3.5 px-4 text-slate-600">{{ $st->batch_name ?? 'Batch 2026' }}</td>
-<td class="py-3.5 px-4">
-<span class="font-bold {{ $att >= 85 ? 'text-emerald-600' : 'text-amber-600' }}">{{ $att }}%</span>
-</td>
-<td class="py-3.5 px-4">
-<div class="flex items-center space-x-3">
-<div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
-<div class="bg-brand-500 h-2 rounded-full" style="width: {{ $prog }}%"></div>
-</div>
-<span class="text-[11px] font-semibold text-slate-500 w-8 text-right">{{ $prog }}%</span>
-</div>
-</td>
-<td class="py-3.5 px-4 text-center">
-@if($st->student_status === 'GRADUATED')
-<span class="inline-block px-3 py-1 text-[11px] font-semibold text-blue-700 bg-blue-50 rounded-full border border-blue-200">
-  Graduated
-</span>
-@elseif($att < 80)
-<span class="inline-block px-3 py-1 text-[11px] font-semibold text-amber-700 bg-amber-50 rounded-full border border-amber-200">
-  Perlu Perhatian
-</span>
-@else
-<span class="inline-block px-3 py-1 text-[11px] font-semibold text-emerald-700 bg-emerald-50 rounded-full border border-emerald-200">
-  Aktif
-</span>
-@endif
-</td>
-<td class="py-3.5 px-4 text-center text-slate-500">
-  {{ $st->branch_name }}
-</td>
-</tr>
-@endforeach
-</tbody>
-</table>
-</div>
-</div>
-<!-- END: StudentTableSection -->
-</main>
-</div>
+<body class="antialiased">
+  <div class="flex min-h-screen relative">
+    <div id="sidebarOverlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/40 z-40 hidden lg:hidden"></div>
 
-<!-- Modal Tambah Siswa -->
-<div id="modalAddStudent" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 flex items-center justify-center p-4">
-  <div class="bg-white rounded-2xl border border-slate-200 shadow-xl w-full max-w-md overflow-hidden">
-    <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
-      <h3 class="text-sm font-extrabold text-slate-900">Tambah Siswa Baru</h3>
-      <button onclick="document.getElementById('modalAddStudent').classList.add('hidden')" class="text-slate-400 hover:text-slate-600">✕</button>
-    </div>
-    <form action="{{ route('erp.students.store') }}" method="POST" class="p-6 space-y-4 text-xs">
-      @csrf
+    <!-- SIDEBAR -->
+    <aside id="sidebar" class="w-64 bg-[#F7F3EB] border-r border-[#EBE5DA] flex flex-col justify-between fixed lg:sticky top-0 h-screen z-50 transition-transform duration-300 -translate-x-full lg:translate-x-0 shrink-0 select-none overflow-y-auto">
       <div>
-        <label class="block font-semibold text-slate-700 mb-1">Nama Lengkap Siswa</label>
-        <input type="text" name="full_name" required class="w-full rounded-xl border-slate-200 text-xs py-2 px-3" placeholder="Contoh: Bagas Adi Saputra"/>
+        <div class="h-20 px-6 flex items-center justify-between border-b border-[#EBE5DA]/60">
+          <a href="{{ route('erp.dashboard') }}" class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-brand-600 to-amber-400 flex items-center justify-center shadow-sm">
+              <div class="w-4 h-4 rounded-full bg-[#F7F3EB]"></div>
+            </div>
+            <div>
+              <div class="font-extrabold text-lg tracking-tight text-slate-900 leading-none">IDEA ERP</div>
+              <div class="text-[10px] text-slate-500 font-medium leading-tight mt-1">Education for<br>a Brighter Tomorrow</div>
+            </div>
+          </a>
+          <button onclick="toggleSidebar()" class="text-slate-400 hover:text-slate-600"><i data-lucide="chevron-left" class="w-5 h-5"></i></button>
+        </div>
+
+        <nav class="p-3.5 space-y-1 text-sm font-semibold">
+          <a href="{{ route('erp.dashboard') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition"><i data-lucide="layout-grid" class="w-5 h-5"></i><span>Dashboard</span></a>
+          <a href="{{ route('erp.admission') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition"><i data-lucide="user-plus" class="w-5 h-5"></i><span>Admission</span></a>
+          <a href="{{ route('erp.finance') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition"><i data-lucide="coins" class="w-5 h-5"></i><span>Finance</span></a>
+          <a href="{{ route('erp.students') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-gradient-to-r from-brand-500 to-amber-500 text-white shadow-md shadow-brand-500/20"><i data-lucide="users" class="w-5 h-5"></i><span>Student Management</span></a>
+          <a href="{{ route('erp.assessments') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition"><i data-lucide="file-check-2" class="w-5 h-5"></i><span>Assessment &amp; Certification</span></a>
+          <a href="{{ route('erp.placements') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition"><i data-lucide="briefcase" class="w-5 h-5"></i><span>Career &amp; Placement</span></a>
+          <a href="{{ route('erp.partners') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition"><i data-lucide="handshake" class="w-5 h-5"></i><span>Partners</span></a>
+          <a href="{{ route('erp.alumni') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition"><i data-lucide="graduation-cap" class="w-5 h-5"></i><span>Alumni</span></a>
+          <a href="{{ route('erp.reports') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition"><i data-lucide="bar-chart-3" class="w-5 h-5"></i><span>Reports</span></a>
+        </nav>
       </div>
-      <div class="grid grid-cols-2 gap-3">
-        <div>
-          <label class="block font-semibold text-slate-700 mb-1">Email</label>
-          <input type="email" name="email" required class="w-full rounded-xl border-slate-200 text-xs py-2 px-3" placeholder="siswa@email.com"/>
-        </div>
-        <div>
-          <label class="block font-semibold text-slate-700 mb-1">No. Telepon</label>
-          <input type="text" name="phone" required class="w-full rounded-xl border-slate-200 text-xs py-2 px-3" placeholder="0813..."/>
-        </div>
-      </div>
-      <div class="grid grid-cols-2 gap-3">
-        <div>
-          <label class="block font-semibold text-slate-700 mb-1">Gender</label>
-          <select name="gender" class="w-full rounded-xl border-slate-200 text-xs py-2 px-3">
-            <option value="MALE">Laki-laki</option>
-            <option value="FEMALE">Perempuan</option>
-          </select>
-        </div>
-        <div>
-          <label class="block font-semibold text-slate-700 mb-1">Cabang</label>
-          <select name="branch_id" class="w-full rounded-xl border-slate-200 text-xs py-2 px-3">
-            @foreach($branches as $b)
-              <option value="{{ $b->id }}">{{ $b->name }}</option>
-            @endforeach
-          </select>
-        </div>
-      </div>
-      <div class="grid grid-cols-2 gap-3">
-        <div>
-          <label class="block font-semibold text-slate-700 mb-1">Program</label>
-          <select name="program_id" class="w-full rounded-xl border-slate-200 text-xs py-2 px-3">
-            @foreach($programs as $pr)
-              <option value="{{ $pr->id }}">{{ $pr->name }}</option>
-            @endforeach
-          </select>
-        </div>
-        <div>
-          <label class="block font-semibold text-slate-700 mb-1">Batch</label>
-          <select name="batch_id" class="w-full rounded-xl border-slate-200 text-xs py-2 px-3">
-            @foreach($batches as $bt)
-              <option value="{{ $bt->id }}">{{ $bt->name }}</option>
-            @endforeach
-          </select>
+
+      <div class="p-3.5">
+        <div class="relative rounded-2xl bg-gradient-to-b from-[#FCEAD2] to-[#F8DEC0] p-4 overflow-hidden border border-amber-200/60">
+          <div class="flex justify-center mb-2">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80" alt="Global Talent" class="w-28 h-28 object-cover rounded-full border-4 border-white/80 shadow-sm" />
+          </div>
+          <h4 class="font-extrabold text-brand-600 text-sm leading-snug">Membangun<br>Talenta Global<br>dari Indonesia</h4>
+          <p class="text-[11px] text-slate-600 mt-1.5 leading-relaxed">Pendidikan, peluang dan masa depan yang lebih baik.</p>
+          <a href="{{ route('erp.reports') }}" class="mt-3 w-full py-2 px-3 bg-gradient-to-r from-brand-500 to-amber-500 text-white font-bold text-xs rounded-full flex items-center justify-center gap-1.5 shadow-sm">
+            <span>Bersama IDEA ERP</span><i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </a>
         </div>
       </div>
-      <div class="pt-2 flex justify-end gap-2">
-        <button type="button" onclick="document.getElementById('modalAddStudent').classList.add('hidden')" class="px-4 py-2 rounded-xl border border-slate-200 text-slate-600 font-semibold">Batal</button>
-        <button type="submit" class="px-4 py-2 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-semibold shadow-sm">Simpan Siswa</button>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <div class="flex-1 flex flex-col min-w-0">
+      <header class="h-20 bg-[#FAF6F0]/90 backdrop-blur-sm sticky top-0 z-30 px-4 lg:px-8 flex items-center justify-between border-b border-[#EBE5DA]/70">
+        <div class="flex items-center gap-3 flex-1 max-w-xl">
+          <button onclick="toggleSidebar()" class="lg:hidden p-2 rounded-lg bg-white border border-slate-200 text-slate-700"><i data-lucide="menu" class="w-5 h-5"></i></button>
+          <form action="{{ route('erp.students') }}" method="GET" class="relative w-full">
+            <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2"></i>
+            <input type="text" name="q" value="{{ $filters['q'] ?? '' }}" placeholder="Cari data siswa, program, pembayaran, atau lainnya..." class="w-full pl-11 pr-4 py-2.5 text-sm bg-[#F3EFE6] border border-[#E6DFD3] rounded-full focus:outline-none focus:bg-white focus:border-brand-500 transition" />
+          </form>
+        </div>
+        <div class="flex items-center gap-4 ml-4">
+          <button class="relative p-2.5 rounded-full bg-white border border-slate-200/80 text-slate-700"><i data-lucide="bell" class="w-5 h-5"></i><span class="w-2.5 h-2.5 bg-brand-500 rounded-full absolute top-1.5 right-1.5 border-2 border-white"></span></button>
+          <div class="flex items-center gap-3 pl-2">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80" class="w-10 h-10 rounded-full object-cover border-2 border-white shadow-sm" />
+            <div class="hidden sm:block">
+              <div class="text-sm font-bold text-slate-800 leading-none">{{ $currentUser->full_name ?? 'Sari Anggraini' }}</div>
+              <div class="text-xs text-slate-500 mt-1">{{ $currentUser->position_name ?? 'Head of Administration' }}</div>
+            </div>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 hidden sm:block"></i>
+          </div>
+        </div>
+      </header>
+
+      <!-- HERO -->
+      <div class="bg-gradient-to-r from-[#FAF6F0] via-[#FAF6F0]/90 to-[#F3E9D8] border-b border-[#EBE5DA]/60 px-4 lg:px-8 py-6">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <h1 class="text-2xl lg:text-3xl font-extrabold text-slate-900 tracking-tight">Student Management</h1>
+            <p class="text-sm text-slate-600 mt-1">Kelola data siswa, pantau perkembangan, dan dukung perjalanan mereka bersama IDEA ERP.</p>
+          </div>
+          <div class="flex items-center gap-8">
+            <div class="text-left md:text-right">
+              <div class="text-sm font-bold text-slate-800">Senin, 21 Apr 2025</div>
+              <div class="text-xs text-slate-500 mt-0.5">Semangat untuk hari yang produktif!</div>
+            </div>
+          </div>
+        </div>
       </div>
-    </form>
+
+      <!-- MAIN -->
+      <main class="p-4 lg:p-8 space-y-6 max-w-[1600px] w-full mx-auto">
+        @if(session('success'))
+        <div class="bg-emerald-50 border border-emerald-200 text-emerald-800 px-4 py-3 rounded-2xl text-xs font-semibold flex items-center justify-between custom-shadow">
+          <span>{{ session('success') }}</span>
+          <button onclick="this.parentElement.remove()" class="text-emerald-600 hover:text-emerald-900">✕</button>
+        </div>
+        @endif
+
+        <!-- 6 KPI CARDS -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+          <div class="bg-white rounded-2xl p-4 custom-shadow border border-slate-100 flex items-start gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center shrink-0"><i data-lucide="users" class="w-5 h-5"></i></div>
+            <div><div class="text-xs text-slate-500">Active Students</div><div class="text-2xl font-extrabold text-slate-900 mt-0.5">{{ $kpis['active_students'] }}</div><div class="text-[11px] font-semibold text-emerald-600 mt-1">↑ 5% <span class="text-slate-400 font-normal">dari bulan lalu</span></div></div>
+          </div>
+          <div class="bg-white rounded-2xl p-4 custom-shadow border border-slate-100 flex items-start gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center shrink-0"><i data-lucide="graduation-cap" class="w-5 h-5"></i></div>
+            <div><div class="text-xs text-slate-500">New Enrollment</div><div class="text-2xl font-extrabold text-slate-900 mt-0.5">{{ $kpis['new_enrollment'] }}</div><div class="text-[11px] font-semibold text-emerald-600 mt-1">↑ 18% <span class="text-slate-400 font-normal">dari bulan lalu</span></div></div>
+          </div>
+          <div class="bg-white rounded-2xl p-4 custom-shadow border border-slate-100 flex items-start gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center shrink-0"><i data-lucide="bar-chart-2" class="w-5 h-5"></i></div>
+            <div><div class="text-xs text-slate-500">Attendance Rate</div><div class="text-2xl font-extrabold text-slate-900 mt-0.5">{{ $kpis['attendance_rate'] }}%</div><div class="text-[11px] font-semibold text-emerald-600 mt-1">↑ 3% <span class="text-slate-400 font-normal">dari bulan lalu</span></div></div>
+          </div>
+          <div class="bg-white rounded-2xl p-4 custom-shadow border border-slate-100 flex items-start gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center shrink-0"><i data-lucide="book-open" class="w-5 h-5"></i></div>
+            <div><div class="text-xs text-slate-500">Training Progress</div><div class="text-2xl font-extrabold text-slate-900 mt-0.5">{{ $kpis['training_progress'] }}%</div><div class="text-[11px] font-semibold text-emerald-600 mt-1">↑ 8% <span class="text-slate-400 font-normal">dari bulan lalu</span></div></div>
+          </div>
+          <div class="bg-white rounded-2xl p-4 custom-shadow border border-slate-100 flex items-start gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center shrink-0"><i data-lucide="home" class="w-5 h-5"></i></div>
+            <div><div class="text-xs text-slate-500">Students in Dormitory</div><div class="text-2xl font-extrabold text-slate-900 mt-0.5">{{ $kpis['dormitory_students'] }}</div><div class="text-[11px] font-semibold text-emerald-600 mt-1">↑ 6% <span class="text-slate-400 font-normal">dari bulan lalu</span></div></div>
+          </div>
+          <div class="bg-white rounded-2xl p-4 custom-shadow border border-slate-100 flex items-start gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center shrink-0"><i data-lucide="award" class="w-5 h-5"></i></div>
+            <div><div class="text-xs text-slate-500">Graduation Ready</div><div class="text-2xl font-extrabold text-slate-900 mt-0.5">{{ $kpis['graduation_ready'] }}</div><div class="text-[11px] font-semibold text-emerald-600 mt-1">↑ 25% <span class="text-slate-400 font-normal">dari bulan lalu</span></div></div>
+          </div>
+        </div>
+
+        <!-- FILTER BAR -->
+        <form action="{{ route('erp.students') }}" method="GET" class="bg-white rounded-2xl p-4 custom-shadow border border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs">
+          <div class="flex flex-wrap items-center gap-3">
+            <span class="font-bold text-slate-700">Filter:</span>
+            <select name="branch_id" onchange="this.form.submit()" class="px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl font-semibold">
+              <option value="">📍 Semua Cabang</option>
+              @foreach($branches as $b)
+                <option value="{{ $b->id }}" @selected(($filters['branch_id'] ?? '') == $b->id)>{{ $b->name }}</option>
+              @endforeach
+            </select>
+            <select name="batch_id" onchange="this.form.submit()" class="px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl font-semibold">
+              <option value="">📅 Semua Batch</option>
+              @foreach($batches as $bt)
+                <option value="{{ $bt->id }}" @selected(($filters['batch_id'] ?? '') == $bt->id)>{{ $bt->name }}</option>
+              @endforeach
+            </select>
+            <select name="program_id" onchange="this.form.submit()" class="px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl font-semibold">
+              <option value="">🎓 Semua Program</option>
+              @foreach($programs as $pr)
+                <option value="{{ $pr->id }}" @selected(($filters['program_id'] ?? '') == $pr->id)>{{ $pr->name }}</option>
+              @endforeach
+            </select>
+          </div>
+          <div class="flex items-center gap-3 flex-1 sm:flex-initial justify-end">
+            <a href="{{ route('erp.students') }}" class="font-bold text-brand-600 hover:underline">Reset Filter</a>
+            <div class="relative w-64">
+              <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
+              <input type="text" name="q" value="{{ $filters['q'] ?? '' }}" placeholder="Cari nama siswa, ID, atau program..." class="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl" />
+            </div>
+          </div>
+        </form>
+
+        <!-- MIDDLE GRID: SCHEDULE + CHARTS + ACTIVITIES -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <!-- Jadwal Kelas Minggu Ini -->
+          <div class="lg:col-span-5 bg-white rounded-2xl p-5 custom-shadow border border-slate-100">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="font-bold text-slate-800 text-base">Jadwal Kelas Minggu Ini</h3>
+              <a href="{{ route('erp.students') }}" class="text-xs font-bold text-brand-600">Lihat Semua →</a>
+            </div>
+            <div class="flex items-center justify-center gap-4 text-xs font-bold text-slate-700 mb-4">
+              <button class="p-1 rounded hover:bg-slate-100">‹</button>
+              <span>21 – 27 Apr 2025</span>
+              <button class="p-1 rounded hover:bg-slate-100">›</button>
+            </div>
+            <div class="overflow-x-auto">
+              <div class="min-w-[420px]">
+                <div class="grid grid-cols-8 text-center text-[11px] text-slate-500 pb-2 border-b border-slate-100">
+                  <div></div>
+                  <div><b class="text-slate-700">Sen</b><br>21 Apr</div>
+                  <div><b class="text-slate-700">Sel</b><br>22 Apr</div>
+                  <div><b class="text-slate-700">Rab</b><br>23 Apr</div>
+                  <div><b class="text-slate-700">Kam</b><br>24 Apr</div>
+                  <div><b class="text-slate-700">Jum</b><br>25 Apr</div>
+                  <div><b class="text-slate-700">Sab</b><br>26 Apr</div>
+                  <div><b class="text-slate-700">Min</b><br>27 Apr</div>
+                </div>
+                <!-- Rows -->
+                <div class="grid grid-cols-8 items-center text-[10px] py-3 border-b border-slate-50 gap-1">
+                  <div class="text-slate-400">08:00</div>
+                  <div class="col-span-2 bg-orange-100 text-brand-600 font-bold p-2 rounded-lg">Hospitality<br>Basic</div>
+                  <div></div>
+                  <div class="col-span-2 bg-orange-50 text-brand-600 font-bold p-2 rounded-lg">F&amp;B Service</div>
+                  <div class="col-span-2"></div>
+                </div>
+                <div class="grid grid-cols-8 items-center text-[10px] py-3 border-b border-slate-50 gap-1">
+                  <div class="text-slate-400">10:00</div>
+                  <div class="col-span-2"></div>
+                  <div class="col-span-2 bg-blue-50 text-blue-600 font-bold p-2 rounded-lg">Culinary<br>Practical</div>
+                  <div></div>
+                  <div class="col-span-2 bg-red-50 text-red-600 font-bold p-2 rounded-lg">Japanese<br>Language</div>
+                </div>
+                <div class="grid grid-cols-8 items-center text-[10px] py-3 border-b border-slate-50 gap-1">
+                  <div class="text-slate-400">13:00</div>
+                  <div></div>
+                  <div class="col-span-3 bg-emerald-50 text-emerald-700 font-bold p-2 rounded-lg">English<br>Communication</div>
+                  <div class="col-span-3"></div>
+                </div>
+                <div class="grid grid-cols-8 items-center text-[10px] py-3 gap-1">
+                  <div class="text-slate-400">15:00</div>
+                  <div></div>
+                  <div class="col-span-2 bg-purple-50 text-purple-700 font-bold p-2 rounded-lg">Housekeeping<br>Training</div>
+                  <div class="col-span-4"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Middle Column: Training Progress + Distribusi Siswa -->
+          <div class="lg:col-span-4 space-y-6">
+            <div class="bg-white rounded-2xl p-5 custom-shadow border border-slate-100">
+              <div class="flex items-center justify-between mb-3">
+                <h3 class="font-bold text-slate-800 text-sm">Training Progress per Program</h3>
+                <span class="text-xs text-slate-500">Tahun Ini ▾</span>
+              </div>
+              @php
+                $barColors = ['bg-brand-500', 'bg-orange-400', 'bg-orange-300', 'bg-amber-700/60', 'bg-orange-200'];
+              @endphp
+              <div class="h-36 flex items-end justify-between gap-2.5 pt-4 px-2 border-b border-slate-100 text-[10px]">
+                @foreach($programStats as $idx => $pStat)
+                @php
+                  $hPx = max(36, (int) round(($pStat->avg_progress / 100) * 100));
+                @endphp
+                <div class="flex flex-col items-center flex-1">
+                  <b class="mb-1">{{ $pStat->avg_progress }}%</b>
+                  <div class="w-full {{ $barColors[$idx % count($barColors)] }} rounded-t" style="height: {{ $hPx }}px;"></div>
+                  <span class="mt-1.5 text-slate-500 truncate max-w-[60px]">{{ explode(' ', $pStat->name)[0] }}</span>
+                </div>
+                @endforeach
+              </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-5 custom-shadow border border-slate-100">
+              <h3 class="font-bold text-slate-800 text-sm mb-3">Distribusi Siswa per Program</h3>
+              @php
+                $totalStdSum = max(1, $programStats->sum('student_count'));
+                $dotColors = ['bg-brand-500', 'bg-orange-400', 'bg-orange-300', 'bg-amber-700', 'bg-orange-200'];
+              @endphp
+              <div class="flex items-center justify-between gap-4">
+                <div class="w-28 h-28 rounded-full flex items-center justify-center shrink-0" style="background: conic-gradient(#F97316 0% 35%, #FB923C 35% 60%, #FDBA74 60% 75%, #B45309 75% 89%, #FED7AA 89% 100%);">
+                  <div class="w-20 h-20 bg-white rounded-full flex flex-col items-center justify-center text-center">
+                    <span class="text-[10px] text-slate-400">Total</span>
+                    <span class="text-base font-extrabold text-slate-900">{{ $kpis['new_enrollment'] }}</span>
+                    <span class="text-[10px] text-slate-400">Siswa</span>
+                  </div>
+                </div>
+                <div class="space-y-1.5 text-xs flex-1">
+                  @foreach($programStats as $idx => $pStat)
+                  @php
+                    $pct = (int) round(($pStat->student_count / $totalStdSum) * 100);
+                  @endphp
+                  <div class="flex justify-between">
+                    <span><span class="inline-block w-2 h-2 rounded-full {{ $dotColors[$idx % count($dotColors)] }} mr-1.5"></span>{{ explode(' ', $pStat->name)[0] }}</span>
+                    <b>{{ $pct }}% <span class="text-slate-400 font-normal">({{ $pStat->student_count }})</span></b>
+                  </div>
+                  @endforeach
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Aktivitas & Notifikasi Terbaru -->
+          <div class="lg:col-span-3 bg-white rounded-2xl p-5 custom-shadow border border-slate-100">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="font-bold text-slate-800 text-sm">Aktivitas &amp; Notifikasi Terbaru</h3>
+              <a href="{{ route('erp.reports') }}" class="text-xs font-bold text-brand-600">Lihat Semua →</a>
+            </div>
+            <div class="space-y-3.5 text-xs">
+              <div class="flex justify-between gap-2"><div><b>Pendaftaran siswa baru</b><div class="text-slate-500 text-[11px]">Andi Wijaya terdaftar pada program Hospitality (Batch Sep 2025)</div></div><span class="text-slate-400 text-[10px]">10:24</span></div>
+              <div class="flex justify-between gap-2"><div><b>Kehadiran kelas</b><div class="text-slate-500 text-[11px]">Tingkat kehadiran program Culinary minggu ini mencapai 92%</div></div><span class="text-slate-400 text-[10px]">09:18</span></div>
+              <div class="flex justify-between gap-2"><div><b>Progres pelatihan meningkat</b><div class="text-slate-500 text-[11px]">Rata-rata progress program Hospitality naik 8% dari bulan lalu</div></div><span class="text-slate-400 text-[10px]">08:45</span></div>
+              <div class="flex justify-between gap-2"><div><b>Penempatan asrama</b><div class="text-slate-500 text-[11px]">Siti Rahma ditempatkan di Dormitory A (kamar 204)</div></div><span class="text-slate-400 text-[10px]">19 Apr</span></div>
+              <div class="flex justify-between gap-2"><div><b>Sertifikat diterbitkan</b><div class="text-slate-500 text-[11px]">5 siswa telah menyelesaikan modul Housekeeping Basic</div></div><span class="text-slate-400 text-[10px]">19 Apr</span></div>
+              <div class="flex justify-between gap-2"><div><b class="text-red-600">Perlu perhatian</b><div class="text-slate-500 text-[11px]">3 siswa dengan kehadiran di bawah 75%</div></div><span class="text-slate-400 text-[10px]">19 Apr</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DAFTAR SISWA TABLE -->
+        <div class="bg-white rounded-2xl p-5 custom-shadow border border-slate-100">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-bold text-slate-800 text-base">Daftar Siswa</h3>
+            <div class="flex items-center gap-2 text-xs">
+              <a href="{{ route('erp.reports.export', ['type' => 'students']) }}" class="px-3.5 py-2 border border-slate-200 rounded-xl font-bold text-slate-700 bg-slate-50">↓ Export</a>
+              <button onclick="document.getElementById('modalAddStudent').classList.remove('hidden')" class="px-4 py-2 bg-brand-500 text-white rounded-xl font-bold">+ Tambah Siswa</button>
+            </div>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead>
+                <tr class="bg-[#F5F1E8] text-slate-600 font-bold">
+                  <th class="py-3 px-3 rounded-l-lg"><input type="checkbox"/></th>
+                  <th class="py-3 px-3">Student ID</th><th class="py-3 px-3">Nama</th><th class="py-3 px-3">Program</th><th class="py-3 px-3">Batch</th><th class="py-3 px-3">Attendance</th><th class="py-3 px-3">Training Progress</th><th class="py-3 px-3 text-center">Status</th><th class="py-3 px-3 rounded-r-lg text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 font-medium">
+                @foreach($students as $idx => $std)
+                @php
+                  $attScore = (int) round($std->attendance_score ?? 90);
+                  $progScore = (int) round($std->progress_score ?? 82);
+                @endphp
+                <tr class="hover:bg-slate-50/80">
+                  <td class="py-3 px-3"><input type="checkbox"/></td>
+                  <td class="py-3 px-3">{{ $std->student_no }}</td>
+                  <td class="py-3 px-3 flex items-center gap-2 font-bold">
+                    <img src="{{ $avatars[$idx % count($avatars)] }}" class="w-6 h-6 rounded-full object-cover"/>
+                    <span>{{ $std->full_name }}</span>
+                  </td>
+                  <td class="py-3 px-3">{{ $std->program_name }}</td>
+                  <td class="py-3 px-3">{{ $std->batch_name ?? 'Batch 2026' }}</td>
+                  <td class="py-3 px-3 {{ $attScore >= 85 ? 'text-emerald-600' : 'text-brand-600' }} font-bold">{{ $attScore }}%</td>
+                  <td class="py-3 px-3">
+                    <div class="flex items-center gap-2">
+                      <div class="w-28 h-2 bg-slate-100 rounded-full"><div class="h-full bg-brand-500 rounded-full" style="width: {{ $progScore }}%"></div></div>
+                      <span>{{ $progScore }}%</span>
+                    </div>
+                  </td>
+                  <td class="py-3 px-3 text-center">
+                    @if($std->student_status === 'ACTIVE')
+                      <span class="px-3 py-0.5 rounded-full bg-emerald-50 text-emerald-600 font-bold">Aktif</span>
+                    @elseif($std->student_status === 'GRADUATED')
+                      <span class="px-3 py-0.5 rounded-full bg-blue-50 text-blue-600 font-bold">Lulus</span>
+                    @else
+                      <span class="px-3 py-0.5 rounded-full bg-orange-50 text-brand-600 font-bold">Perlu Perhatian</span>
+                    @endif
+                  </td>
+                  <td class="py-3 px-3 text-center">•••</td>
+                </tr>
+                @endforeach
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
   </div>
-</div>
-</body></html>
+
+  <!-- Modal Tambah Siswa -->
+  <div id="modalAddStudent" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-xl w-full max-w-md overflow-hidden">
+      <div class="p-4 border-b border-slate-100 flex items-center justify-between">
+        <h3 class="text-sm font-extrabold text-slate-900">Tambah Siswa Baru</h3>
+        <button onclick="document.getElementById('modalAddStudent').classList.add('hidden')" class="text-slate-400 hover:text-slate-600">✕</button>
+      </div>
+      <form action="{{ route('erp.students.store') }}" method="POST" class="p-5 space-y-3.5 text-xs">
+        @csrf
+        <div>
+          <label class="block font-semibold text-slate-600 mb-1">Nama Lengkap Siswa</label>
+          <input name="full_name" required class="w-full px-3 py-2 border border-slate-200 rounded-xl" placeholder="Nama lengkap..." />
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-semibold text-slate-600 mb-1">Email</label>
+            <input name="email" type="email" required class="w-full px-3 py-2 border border-slate-200 rounded-xl" placeholder="siswa@email.id" />
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-600 mb-1">No. HP</label>
+            <input name="phone" required class="w-full px-3 py-2 border border-slate-200 rounded-xl" placeholder="0812..." />
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-semibold text-slate-600 mb-1">Gender</label>
+            <select name="gender" class="w-full px-3 py-2 border border-slate-200 rounded-xl">
+              <option value="MALE">Laki-laki</option>
+              <option value="FEMALE">Perempuan</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-600 mb-1">Cabang</label>
+            <select name="branch_id" class="w-full px-3 py-2 border border-slate-200 rounded-xl">
+              @foreach($branches as $b)
+                <option value="{{ $b->id }}">{{ $b->name }}</option>
+              @endforeach
+            </select>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-semibold text-slate-600 mb-1">Program</label>
+            <select name="program_id" class="w-full px-3 py-2 border border-slate-200 rounded-xl">
+              @foreach($programs as $pr)
+                <option value="{{ $pr->id }}">{{ $pr->name }}</option>
+              @endforeach
+            </select>
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-600 mb-1">Batch</label>
+            <select name="batch_id" class="w-full px-3 py-2 border border-slate-200 rounded-xl">
+              @foreach($batches as $bt)
+                <option value="{{ $bt->id }}">{{ $bt->name }}</option>
+              @endforeach
+            </select>
+          </div>
+        </div>
+        <div class="pt-2 flex justify-end gap-2">
+          <button type="button" onclick="document.getElementById('modalAddStudent').classList.add('hidden')" class="px-4 py-2 rounded-xl border border-slate-200 text-slate-600 font-semibold">Batal</button>
+          <button type="submit" class="px-4 py-2 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-semibold shadow-sm">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    lucide.createIcons();
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('-translate-x-full');
+      document.getElementById('sidebarOverlay').classList.toggle('hidden');
+    }
+  </script>
+</body>
+</html>
